@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
-import java.sql.Timestamp;
+
 
 import perm.model.*;
+
 
 public class AdvertisementsDao {
 	protected ConnectionManager connectionManager;
@@ -36,8 +37,8 @@ public class AdvertisementsDao {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertAdvertisement, Statement.RETURN_GENERATED_KEYS);
 			insertStmt.setString(1, advertisement.getMeans().name());
-			insertStmt.setTimestamp(2, advertisement.getStartDate().getTime());
-			insertStmt.setTimestamp(3, advertisement.getEndDate().getTime());
+			insertStmt.setDate(2, (java.sql.Date) advertisement.getStartDate());
+			insertStmt.setDate(3, (java.sql.Date)advertisement.getEndDate());
 			insertStmt.setLong(4, advertisement.getJob().getJobId());
 			insertStmt.executeUpdate();
 
@@ -130,15 +131,15 @@ public class AdvertisementsDao {
 			selectStmt.setInt(1, advertisementId);
 			results = selectStmt.executeQuery();
 
-			JobsDao jobsDao = JobsDao.getInstance();
+			JobDao jobsDao = JobDao.getInstance();
 			
 			if (results.next()) {
-				long resultAdvertisementId = results.getLong("AdvertisementId");
+				int resultAdvertisementId = results.getInt("AdvertisementId");
 				Advertisements.AdvertiseMeans means = Advertisements.AdvertiseMeans.valueOf(results.getString("Means"));
 				Date start = results.getTime("StartDate");
 				Date end = results.getTime("EndState");
-				Long jobId = results.getLong("JobId");
-				Jobs job = jobsDao.getJobById(jobId);
+				long jobId = results.getLong("JobId");
+				Job job = jobsDao.getJobById(jobId);
 				Advertisements advertisement = new Advertisements(resultAdvertisementId,means,start,end,job);
 				return advertisement;
 			}
