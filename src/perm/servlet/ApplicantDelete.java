@@ -40,7 +40,7 @@ public class ApplicantDelete extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        String applicantId = req.getParameter("ApplicantId");
+        String applicantId = req.getParameter("ApplicantID");
         if (applicantId == null || applicantId.trim().isEmpty()) {
             messages.put("title", "Invalid ApplicantId");
             messages.put("disableSubmit", "true");

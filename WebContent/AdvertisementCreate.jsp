@@ -14,8 +14,8 @@
 	<h1>Create Advertisement</h1>
 	<form action="advertisementcreate" method="post">
 		<p>
-			<label for="AdvertisementId">AdvertisementId</label>
-			<input id="AdvertisementId" name="AdvertisementId" value="">
+			<label for="AdvertisementID">AdvertisementID</label>
+			<input id="AdvertisementID" name="AdvertisementID" value="">
 		</p>
 		<p>
 			<label for="Means">Means</label>

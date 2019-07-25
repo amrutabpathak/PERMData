@@ -45,7 +45,7 @@ public class AdvertisementCreate extends HttpServlet{
         req.setAttribute("messages", messages);
 
         
-        String advertisementId = req.getParameter("AdvertisementId");
+        String advertisementId = req.getParameter("AdvertisementID");
         if (advertisementId == null || advertisementId.trim().isEmpty()) {
             messages.put("success", "Invalid AdvertisementId");
         } else {
