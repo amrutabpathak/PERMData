@@ -57,6 +57,10 @@ public class Application {
 		this.applicantId = applicantId;
 		this.agentFirmName = agentFirmName;
 	}
+	
+	public Application(String caseNumber) {
+		this.caseNumber = caseNumber; 
+	}
 
 	
 	
