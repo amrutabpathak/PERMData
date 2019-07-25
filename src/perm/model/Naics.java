@@ -16,10 +16,6 @@ public class Naics {
 		this.naicsCode = naicsCode;
 		this.naicsTitle = naicsTitle;
 	}
-	
-	public Naics(int naicsCode) {
-		this.naicsCode = naicsCode;
-	}
 
 	public Naics(int naicsCode) {
 		super();
