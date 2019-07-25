@@ -86,11 +86,11 @@ public class JobCreate extends HttpServlet {
 		String sourceNameOther = req.getParameter("sourcenameother");
 		String determDateStr = req.getParameter("determdate");
 		String expirationDateStr = req.getParameter("expirationdate");
-		String prevailingWageSocCode = req.getParameter("prevailingwagesoccode");
-		String naicsCode = req.getParameter("naicscode");
+		String naicsCodeStr = req.getParameter("naicscode");
+		int naicsCode = Integer.parseInt(naicsCodeStr);
 		String socSystem = req.getParameter("socsystem");
 		SOCSystem s = new SOCSystem(socSystem);
-		
+		Naics naics = new Naics(naicsCode); 
         	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         	java.util.Date date = new java.util.Date();
         	
@@ -116,7 +116,7 @@ public class JobCreate extends HttpServlet {
 	        			EducationLevel.get(comboEduExpDegree) , comboEduExpDegreeOther, comboEduExpYrs,
 	        			Integer.parseInt( wageOfferFrom9089), Integer.parseInt(wageOfferTo9089), PayUnit.get(wageOfferUnit) , Level.get(level9089) , Integer.parseInt(amount),
 	        			PayUnit.get(unitOfPay) , Source.get(sourceName) , sourceNameOther, determDate, expirationDate,
-	        			null, s);
+	        			naics, s);
 	        	job = jobDao.create(job);
 	        	messages.put("success", "Successfully created " + job.getJobId());
 	        } catch (SQLException e) {

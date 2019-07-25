@@ -17,6 +17,7 @@ import perm.model.Job.EducationLevel;
 import perm.model.Job.Level;
 import perm.model.Job.PayUnit;
 import perm.model.Job.Source;
+import perm.model.Naics;
 
 public class JobDao {
 
@@ -78,7 +79,7 @@ public class JobDao {
 			insertStmt.setDate(26, job.getDetermDate());
 			insertStmt.setDate(27, job.getExpirationDate());
 			insertStmt.setString(28,job.getSocSystem().getPrevailingWageSocCode());
-			insertStmt.setInt(29,  1);//job.getNaics().getNaicsCode()); //hardcode
+			insertStmt.setInt(29,  job.getNaics().getNaicsCode());
 			insertStmt.executeUpdate();
 			resultKey = insertStmt.getGeneratedKeys();
 			int jobId = -1;
@@ -184,7 +185,7 @@ public class JobDao {
 			selectStmt.setLong(1, jobId);
 			results = selectStmt.executeQuery();
 			JobDao jobDao = JobDao.getInstance();
-			//NAICSDao naicsDao = NAICSDao.getInstance();
+			NaicsDao naicsDao = NaicsDao.getInstance();
 			SOCSystemDao socSystemDao = SOCSystemDao.getInstance();
 			
 			if(results.next()) {
@@ -219,15 +220,15 @@ public class JobDao {
 				Date determDate = results.getDate("DetermDate");
 				Date expirationDate = results.getDate("ExpirationDate");
 				String prevailingWageSocCode = results.getString("PrevailingWageSocCode");
-				//int naicsCode = results.getInt("NAICSCode");
+				int naicsCode = results.getInt("NAICSCode");
 				
-				//NAICS naics = naicsDao.getNAICSFromNAICSCode(naicsCode);
+				Naics naics = naicsDao.getNaicsFromNaicsCode(naicsCode);
 				SOCSystem socSystem = socSystemDao.getSocSystemFromSocCode(prevailingWageSocCode);
 				//change null field of constructor to naics
 				Job job = new Job(jobId,city, state, code, jobTitle, education, educationOther, major, requiresTraining,
 						trainingMonths, trainingField, requiresExp, expMonths, requiresAltField, altFieldName, comboEduExpDegree
 						,comboEduExpDegreeOther, comboEduExpYrs, wageOfferFrom9089, wageOfferTo9089, wageOfferUnit, level9089
-						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, null, socSystem);
+						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, naics, socSystem);
 				return job;
 			}
 		} catch (SQLException e) {
@@ -268,7 +269,7 @@ public class JobDao {
 			selectStmt = connection.prepareStatement(selectJobs);
 			selectStmt.setString(1, socSystem.getPrevailingWageSocCode());
 			results = selectStmt.executeQuery();
-			//NAICSDao naicsDao = NAICSDao.getInstance();
+			NaicsDao naicsDao = NaicsDao.getInstance();
 			SOCSystemDao socSystemDao = SOCSystemDao.getInstance();
 			while(results.next()) {
 				long jobId = results.getLong("JobId");
@@ -302,13 +303,13 @@ public class JobDao {
 				Date determDate = results.getDate("DetermDate");
 				Date expirationDate = results.getDate("ExpirationDate");
 				String prevailingWageSocCode = results.getString("PrevailingWageSocCode");
-			//	int naicsCode = results.getInt("NAICSCode");
+				int naicsCode = results.getInt("NAICSCode");
 				//change null field of constructor to naics
-			//	NAICS naics = naicsDao.getNAICSFromNAICSCode(naicsCode);
+				Naics naics = naicsDao.getNaicsFromNaicsCode(naicsCode);
 				Job job = new Job(jobId,city, state, code, jobTitle, education, educationOther, major, requiresTraining,
 						trainingMonths, trainingField, requiresExp, expMonths, requiresAltField, altFieldName, comboEduExpDegree
 						,comboEduExpDegreeOther, comboEduExpYrs, wageOfferFrom9089, wageOfferTo9089, wageOfferUnit, level9089
-						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, null, socSystem);
+						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, naics, socSystem);
 				
 				jobs.add(job);
 			}
