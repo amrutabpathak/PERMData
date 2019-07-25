@@ -42,7 +42,7 @@ public class JobDao {
 			" ComboEduExpDegree ,ComboEduExpDegreeOther ,ComboEduExpYrs ,WageOfferFrom9089 ,WageOfferTo9089 ,"+
 			" WageOfferUnit ,Level9089 ,Amount ,UnitOfPay ,SourceName ,SourceNameOther ,DetermDate ,ExpirationDate ,"+
 			" PrevailingWageSocCode ,NAICSCode ) " +
-			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -55,7 +55,7 @@ public class JobDao {
 			insertStmt.setString(2, job.getState());
 			insertStmt.setString(3, job.getCode());
 			insertStmt.setString(4, job.getJobTitle());
-			insertStmt.setString(5, job.getEducation().name());
+			insertStmt.setString(5, EducationLevel.valueOf(job.getEducation().name()).educationLevelValue());
 			insertStmt.setString(6, job.getEducationOther());
 			insertStmt.setString(7, job.getMajor());
 			insertStmt.setString(8, job.getRequiresTraining().name());
@@ -65,23 +65,22 @@ public class JobDao {
 			insertStmt.setInt(12, job.getExpMonths());
 			insertStmt.setString(13, job.getRequiresAltField().name());
 			insertStmt.setString(14, job.getAltFieldName());
-			insertStmt.setString(15, job.getComboEduExpDegree().name());
+			insertStmt.setString(15, EducationLevel.valueOf(job.getComboEduExpDegree().name()).educationLevelValue());
 			insertStmt.setString(16, job.getComboEduExpDegreeOther());
 			insertStmt.setString(17, job.getComboEduExpYrs());
 			insertStmt.setInt(18, job.getWageOfferFrom9089());
 			insertStmt.setInt(19, job.getWageOfferTo9089());
-			insertStmt.setString(20, job.getWageOfferUnit().name());
-			insertStmt.setString(21, job.getLevel9089().name());
+			insertStmt.setString(20, PayUnit.valueOf(job.getWageOfferUnit().name()).payUnitValues());
+			insertStmt.setString(21, Level.valueOf(job.getLevel9089().name()).levelValue());
 			insertStmt.setInt(22, job.getAmount());
-			insertStmt.setString(23, job.getUnitOfPay().name());
-			insertStmt.setString(24, job.getSourceName().name());
+			insertStmt.setString(23, PayUnit.valueOf(job.getUnitOfPay().name()).payUnitValues());
+			insertStmt.setString(24, Source.valueOf(job.getSourceName().name()).sourceValue());
 			insertStmt.setString(25, job.getSourceNameOther());
 			insertStmt.setDate(26, job.getDetermDate());
 			insertStmt.setDate(27, job.getExpirationDate());
-			insertStmt.setString(28, job.getSocSystem().getPrevailingWageSocCode());
-			insertStmt.setInt(29, job.getNaics().getNaicsCode());
+			insertStmt.setString(28,job.getSocSystem().getPrevailingWageSocCode());
+			insertStmt.setInt(29,  1);//job.getNaics().getNaicsCode()); //hardcode
 			insertStmt.executeUpdate();
-			
 			resultKey = insertStmt.getGeneratedKeys();
 			int jobId = -1;
 			if(resultKey.next()) {
@@ -170,7 +169,7 @@ public class JobDao {
 
 	public Job getJobById(long jobId) throws SQLException {
 		String selectJob =
-			"SELECT City ,State ,Code ,JobTitle ,Education ,EducationOther , " + 
+			"SELECT JobID, City ,State ,Code ,JobTitle ,Education ,EducationOther , " + 
 			"Major ,RequiresTraining, TrainingMonths ,TrainingField ,RequiresExp,ExpMonths ,RequiresAltField ,AltFieldName ," + 
 			"ComboEduExpDegree ,ComboEduExpDegreeOther ,ComboEduExpYrs ,WageOfferFrom9089 ,WageOfferTo9089 ," + 
 			"WageOfferUnit ,Level9089 ,Amount ,UnitOfPay ,SourceName ,SourceNameOther ,DetermDate ,ExpirationDate ," + 
@@ -186,16 +185,16 @@ public class JobDao {
 			selectStmt.setLong(1, jobId);
 			results = selectStmt.executeQuery();
 			JobDao jobDao = JobDao.getInstance();
-			NAICSDao naicsDao = NAICSDao.getInstance();
+			//NAICSDao naicsDao = NAICSDao.getInstance();
 			SOCSystemDao socSystemDao = SOCSystemDao.getInstance();
 			
 			if(results.next()) {
-				long resultJobId = results.getLong("JobId");
+				long resultJobId = results.getLong("JobID");
 				String city = results.getString("City");
 				String state = results.getString("State");
 				String code = results.getString("Code");
 				String jobTitle = results.getString("JobTitle");
-				Job.EducationLevel education = Job.EducationLevel.valueOf(results.getString("Education"));
+				Job.EducationLevel education = Job.EducationLevel.get(results.getString("Education"));
 				String educationOther = results.getString("EducationOther");
 				String major = results.getString("Major");
 				Job.AspectRequired requiresTraining = Job.AspectRequired.valueOf(results.getString("RequiresTraining"));
@@ -205,31 +204,31 @@ public class JobDao {
 				int expMonths = results.getInt("ExpMonths");
 				Job.AspectRequired requiresAltField = Job.AspectRequired.valueOf(results.getString("RequiresAltField"));
 				String altFieldName = results.getString("AltFieldName");
-				Job.EducationLevel comboEduExpDegree = Job.EducationLevel.valueOf(results.getString("ComboEduExpDegree"));
+				Job.EducationLevel comboEduExpDegree = Job.EducationLevel.get(results.getString("ComboEduExpDegree"));
 				String comboEduExpDegreeOther = results.getString("ComboEduExpDegreeOther");
 				String comboEduExpYrs = results.getString("ComboEduExpYrs");
 				
 				int wageOfferFrom9089 = results.getInt("WageOfferFrom9089");
 				int wageOfferTo9089 = results.getInt("WageOfferTo9089");
-				Job.PayUnit wageOfferUnit = Job.PayUnit.valueOf(results.getString("WageOfferUnit"));
-				Job.Level level9089 = Job.Level.valueOf(results.getString("Level9089"));
+				Job.PayUnit wageOfferUnit = Job.PayUnit.get(results.getString("WageOfferUnit"));
+				Job.Level level9089 = Job.Level.get(results.getString("Level9089"));
 				int amount = results.getInt("Amount");
-				Job.PayUnit unitOfPay = Job.PayUnit.valueOf(results.getString("UnitOfPay"));
-				Job.Source sourceName = Job.Source.valueOf(results.getString("SourceName"));	
+				Job.PayUnit unitOfPay = Job.PayUnit.get(results.getString("UnitOfPay"));
+				Job.Source sourceName = Job.Source.get(results.getString("SourceName"));	
 				
 				String sourceNameOther = results.getString("SourceNameOther");
 				Date determDate = results.getDate("DetermDate");
 				Date expirationDate = results.getDate("ExpirationDate");
 				String prevailingWageSocCode = results.getString("PrevailingWageSocCode");
-				int naicsCode = results.getInt("NAICSCode");
+				//int naicsCode = results.getInt("NAICSCode");
 				
-				NAICS naics = naicsDao.getNAICSFromNAICSCode(naicsCode);
+				//NAICS naics = naicsDao.getNAICSFromNAICSCode(naicsCode);
 				SOCSystem socSystem = socSystemDao.getSocSystemFromSocCode(prevailingWageSocCode);
-				
+				//change null field of constructor to naics
 				Job job = new Job(jobId,city, state, code, jobTitle, education, educationOther, major, requiresTraining,
 						trainingMonths, trainingField, requiresExp, expMonths, requiresAltField, altFieldName, comboEduExpDegree
 						,comboEduExpDegreeOther, comboEduExpYrs, wageOfferFrom9089, wageOfferTo9089, wageOfferUnit, level9089
-						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, naics, socSystem);
+						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, null, socSystem);
 				return job;
 			}
 		} catch (SQLException e) {
@@ -255,12 +254,12 @@ public class JobDao {
 	public List<Job> getJobForSOCCode(SOCSystem socSystem) throws SQLException {
 		List<Job> jobs = new ArrayList<Job>();
 		String selectJobs=
-				"SELECT City ,State ,Code ,JobTitle ,Education ,EducationOther , " + 
+				"SELECT JobId, City ,State ,Code ,JobTitle ,Education ,EducationOther , " + 
 						"Major ,RequiresTraining, TrainingMonths ,TrainingField ,RequiresExp,ExpMonths ,RequiresAltField ,AltFieldName ," + 
 						"ComboEduExpDegree ,ComboEduExpDegreeOther ,ComboEduExpYrs ,WageOfferFrom9089 ,WageOfferTo9089 ," + 
 						"WageOfferUnit ,Level9089 ,Amount ,UnitOfPay ,SourceName ,SourceNameOther ,DetermDate ,ExpirationDate ," + 
 						"PrevailingWageSocCode ,NAICSCode "+
-			"FROM Job" +
+			"FROM Job " +
 			"WHERE PrevailingWageSocCode=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -270,7 +269,7 @@ public class JobDao {
 			selectStmt = connection.prepareStatement(selectJobs);
 			selectStmt.setString(1, socSystem.getPrevailingWageSocCode());
 			results = selectStmt.executeQuery();
-			NAICSDao naicsDao = NAICSDao.getInstance();
+			//NAICSDao naicsDao = NAICSDao.getInstance();
 			SOCSystemDao socSystemDao = SOCSystemDao.getInstance();
 			while(results.next()) {
 				long jobId = results.getLong("JobId");
@@ -278,7 +277,7 @@ public class JobDao {
 				String state = results.getString("State");
 				String code = results.getString("Code");
 				String jobTitle = results.getString("JobTitle");
-				Job.EducationLevel education = Job.EducationLevel.valueOf(results.getString("Education"));
+				Job.EducationLevel education = Job.EducationLevel.get(results.getString("Education"));
 				String educationOther = results.getString("EducationOther");
 				String major = results.getString("Major");
 				Job.AspectRequired requiresTraining = Job.AspectRequired.valueOf(results.getString("RequiresTraining"));
@@ -288,29 +287,29 @@ public class JobDao {
 				int expMonths = results.getInt("ExpMonths");
 				Job.AspectRequired requiresAltField = Job.AspectRequired.valueOf(results.getString("RequiresAltField"));
 				String altFieldName = results.getString("AltFieldName");
-				Job.EducationLevel comboEduExpDegree = Job.EducationLevel.valueOf(results.getString("ComboEduExpDegree"));
+				Job.EducationLevel comboEduExpDegree = Job.EducationLevel.get(results.getString("ComboEduExpDegree"));
 				String comboEduExpDegreeOther = results.getString("ComboEduExpDegreeOther");
 				String comboEduExpYrs = results.getString("ComboEduExpYrs");
 				
 				int wageOfferFrom9089 = results.getInt("WageOfferFrom9089");
 				int wageOfferTo9089 = results.getInt("WageOfferTo9089");
-				Job.PayUnit wageOfferUnit = Job.PayUnit.valueOf(results.getString("WageOfferUnit"));
-				Job.Level level9089 = Job.Level.valueOf(results.getString("Level9089"));
+				Job.PayUnit wageOfferUnit = Job.PayUnit.get(results.getString("WageOfferUnit"));
+				Job.Level level9089 = Job.Level.get(results.getString("Level9089"));
 				int amount = results.getInt("Amount");
-				Job.PayUnit unitOfPay = Job.PayUnit.valueOf(results.getString("UnitOfPay"));
-				Job.Source sourceName = Job.Source.valueOf(results.getString("SourceName"));	
+				Job.PayUnit unitOfPay = Job.PayUnit.get(results.getString("UnitOfPay"));
+				Job.Source sourceName = Job.Source.get(results.getString("SourceName"));	
 				
 				String sourceNameOther = results.getString("SourceNameOther");
 				Date determDate = results.getDate("DetermDate");
 				Date expirationDate = results.getDate("ExpirationDate");
 				String prevailingWageSocCode = results.getString("PrevailingWageSocCode");
-				int naicsCode = results.getInt("NAICSCode");
-				
-				NAICS naics = naicsDao.getNAICSFromNAICSCode(naicsCode);
+			//	int naicsCode = results.getInt("NAICSCode");
+				//change null field of constructor to naics
+			//	NAICS naics = naicsDao.getNAICSFromNAICSCode(naicsCode);
 				Job job = new Job(jobId,city, state, code, jobTitle, education, educationOther, major, requiresTraining,
 						trainingMonths, trainingField, requiresExp, expMonths, requiresAltField, altFieldName, comboEduExpDegree
 						,comboEduExpDegreeOther, comboEduExpYrs, wageOfferFrom9089, wageOfferTo9089, wageOfferUnit, level9089
-						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, naics, socSystem);
+						, amount, unitOfPay, sourceName, sourceNameOther, determDate, expirationDate, null, socSystem);
 				
 				jobs.add(job);
 			}
