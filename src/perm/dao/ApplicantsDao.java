@@ -27,8 +27,8 @@ public class ApplicantsDao {
 	}
 
 	public Applicants create(Applicants applicant) throws SQLException {
-		String insertApplicant = "INSERT INTO Applicants(City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName) "
-				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String insertApplicant = "INSERT INTO Applicants(City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName,ApplicantID) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -48,17 +48,9 @@ public class ApplicantsDao {
 			insertStmt.setString(11, applicant.getInstitution());
 			insertStmt.setLong(12, applicant.getJob().getJobId());
 			insertStmt.setString(13, applicant.getEmployer().getName());
+			insertStmt.setLong(14, applicant.getApplicantId());
 
 			insertStmt.executeUpdate();
-
-			resultKey = insertStmt.getGeneratedKeys();
-			int applicantId = -1;
-			if (resultKey.next()) {
-				applicantId = resultKey.getInt(1);
-			} else {
-				throw new SQLException("Unable to retrieve auto-generated key.");
-			}
-			applicant.setApplicantId(applicantId);
 			return applicant;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +69,7 @@ public class ApplicantsDao {
 	}
 
 	public Applicants updateAdmissionClass(Applicants applicant, String newAdmissionClass) throws SQLException {
-		String updateApplicant = "UPDATE Applicants SET AdmissionClass=? WHERE ApplicantId=?;";
+		String updateApplicant = "UPDATE Applicants SET AdmissionClass=? WHERE ApplicantID=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -105,7 +97,7 @@ public class ApplicantsDao {
 	}
 
 	public Applicants delete(Applicants applicant) throws SQLException {
-		String deleteApplicant = "DELETE FROM Applicants WHERE ApplicantId=?;";
+		String deleteApplicant = "DELETE FROM Applicants WHERE ApplicantID=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -131,7 +123,7 @@ public class ApplicantsDao {
 
 	public Applicants getApplicantById(long applicantId) throws SQLException {
 		String selectApplicant = "SELECT City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName "
-				+ "FROM Applicants " + "WHERE ApplicantId=?;";
+				+ "FROM Applicants " + "WHERE ApplicantID=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -145,14 +137,13 @@ public class ApplicantsDao {
 			EmployerDao employersDao = EmployerDao.getInstance();
 
 			if (results.next()) {
-				long resultApplicantId = results.getLong("ApplicantId");
 				String city = results.getString("City");
 				String state = results.getString("State");
 				String code = results.getString("Code");
 				String citizenship = results.getString("Citizenship");
 				String birthCountry = results.getString("BirthCountry");
 				String admissionClass = results.getString("AdmissionClass");
-				Applicants.EducationLevel education = Applicants.EducationLevel.valueOf(results.getString("Education"));
+				Applicants.EducationLevel education = Applicants.EducationLevel.fromString(results.getString("Education"));
 				String educationOther = results.getString("EducationOther");
 				String major = results.getString("Major");
 				String yearCompleted = results.getString("YearCompleted");
@@ -162,7 +153,7 @@ public class ApplicantsDao {
 
 				Job job = jobsDao.getJobById(jobId);
 				Employer employer = employersDao.getEmployerByName(employerName);
-				Applicants applicant = new Applicants(resultApplicantId, city, state, code, citizenship, birthCountry,
+				Applicants applicant = new Applicants(applicantId, city, state, code, citizenship, birthCountry,
 						admissionClass, education, educationOther, major, yearCompleted, institution, job, employer);
 				return applicant;
 			}
@@ -186,7 +177,7 @@ public class ApplicantsDao {
 	
 	public List<Applicants> getApplicantsByAdmissionClass(String admissionClass) throws SQLException {
 		List<Applicants> applicants = new ArrayList<Applicants>();
-		String selectApplicants = "SELECT ApplicantId,City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName "
+		String selectApplicants = "SELECT ApplicantID,City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName "
 				+ "From Applicants "
 				+ "WHERE AdmissionClass=?;";
 		Connection connection = null;
@@ -201,14 +192,14 @@ public class ApplicantsDao {
 			JobDao jobsDao = JobDao.getInstance();
 			EmployerDao employersDao = EmployerDao.getInstance();
 			while (results.next()) {
-				long resultApplicantId = results.getLong("ApplicantId");
+				long resultApplicantId = results.getLong("ApplicantID");
 				String city = results.getString("City");
 				String state = results.getString("State");
 				String code = results.getString("Code");
 				String citizenship = results.getString("Citizenship");
 				String birthCountry = results.getString("BirthCountry");
 				String resultAdmissionClass = results.getString("AdmissionClass");
-				Applicants.EducationLevel education = Applicants.EducationLevel.valueOf((results.getString("Education")));
+				Applicants.EducationLevel education = Applicants.EducationLevel.fromString((results.getString("Education")));
 				String educationOther = results.getString("EducationOther");
 				String major = results.getString("Major");
 				String yearCompleted = results.getString("YearCompleted");
@@ -242,9 +233,9 @@ public class ApplicantsDao {
 	
 	public List<Applicants> getApplicantsByBirthCountry(String birthCountry) throws SQLException {
 		List<Applicants> applicants = new ArrayList<Applicants>();
-		String selectApplicants = "SELECT ApplicantId,City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName "
+		String selectApplicants = "SELECT ApplicantID,City,State,Code,Citizenship,BirthCountry,AdmissionClass,Education,EducationOther,Major,YearCompleted,Institution,JobID,EmployerName "
 				+ "From Applicants "
-				+ "WHERE AdmissionClass=?;";
+				+ "WHERE BirthCountry=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -257,14 +248,14 @@ public class ApplicantsDao {
 			JobDao jobsDao = JobDao.getInstance();
 			EmployerDao employersDao = EmployerDao.getInstance();
 			while (results.next()) {
-				long resultApplicantId = results.getLong("ApplicantId");
+				long resultApplicantId = results.getLong("ApplicantID");
 				String city = results.getString("City");
 				String state = results.getString("State");
 				String code = results.getString("Code");
 				String citizenship = results.getString("Citizenship");
 				String resultBirthCountry = results.getString("BirthCountry");
 				String admissionClass = results.getString("AdmissionClass");
-				Applicants.EducationLevel education = Applicants.EducationLevel.valueOf((results.getString("Education")));
+				Applicants.EducationLevel education = Applicants.EducationLevel.fromString((results.getString("Education")));
 				String educationOther = results.getString("EducationOther");
 				String major = results.getString("Major");
 				String yearCompleted = results.getString("YearCompleted");
