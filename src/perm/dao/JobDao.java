@@ -11,7 +11,6 @@ import java.sql.Date;
 import java.util.List;
 
 import perm.model.Job;
-import perm.model.NAICS;
 import perm.model.SOCSystem;
 import perm.model.Job.AspectRequired;
 import perm.model.Job.EducationLevel;
