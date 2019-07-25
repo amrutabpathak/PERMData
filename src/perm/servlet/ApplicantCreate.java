@@ -52,7 +52,7 @@ public class ApplicantCreate extends HttpServlet{
 			String major = req.getParameter("Major");
 			String yearCompleted = req.getParameter("YearCompleted");
 			String institution = req.getParameter("Institution");
-			long jobId = Long.parseLong(req.getParameter("JobId"));	
+			long jobId = Long.parseLong(req.getParameter("JobID"));
 			String employerName = req.getParameter("EmployerName");
 		
 			try {
