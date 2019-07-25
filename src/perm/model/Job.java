@@ -34,7 +34,7 @@ public class Job {
 	protected String sourceNameOther;
 	protected Date determDate;
 	protected Date expirationDate;
-	protected NAICS naics;
+	protected Naics naics;
 	protected SOCSystem socSystem;
 	
 	public enum EducationLevel {
@@ -152,7 +152,7 @@ public class Job {
 			String altFieldName, EducationLevel comboEduExpDegree, String comboEduExpDegreeOther, String comboEduExpYrs,
 			int wageOfferFrom9089, int wageOfferTo9089, PayUnit wageOfferUnit, Level level9089, int amount,
 			PayUnit unitOfPay, Source sourceName, String sourceNameOther, Date determDate, Date expirationDate,
-			NAICS naics, SOCSystem socSystem) {
+			Naics naics, SOCSystem socSystem) {
 		super();
 		this.jobId = jobId;
 		this.city = city;
@@ -197,7 +197,7 @@ public class Job {
 			EducationLevel comboEduExpDegree, String comboEduExpDegreeOther, String comboEduExpYrs,
 			int wageOfferFrom9089, int wageOfferTo9089, PayUnit wageOfferUnit, Level level9089, int amount,
 			PayUnit unitOfPay, Source sourceName, String sourceNameOther, Date determDate, Date expirationDate,
-			NAICS naics, SOCSystem socSystem) {
+			Naics naics, SOCSystem socSystem) {
 		super();
 		this.city = city;
 		this.state = state;
@@ -459,11 +459,12 @@ public class Job {
 		this.expirationDate = expirationDate;
 	}
 
-	public NAICS getNaics() {
+
+	public Naics getNaics() {
 		return naics;
 	}
 
-	public void setNaics(NAICS naics) {
+	public void setNaics(Naics naics) {
 		this.naics = naics;
 	}
 
