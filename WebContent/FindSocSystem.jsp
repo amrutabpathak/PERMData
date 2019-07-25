@@ -31,7 +31,6 @@
             <tr>
                 <th>PrevailingWageSocCode</th>
                 <th>PrevailingWageSocTitle</th>
-                <th> Jobs</th>
                 <th>Delete SocSystem</th>
                 <th>Update SocSystem</th>
             </tr>
