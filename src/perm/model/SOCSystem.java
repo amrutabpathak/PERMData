@@ -10,6 +10,11 @@ public class SOCSystem {
 		this.prevailingWageSocTitle = prevailingWageSocTitle;
 	}
 
+	public SOCSystem(String prevailingWageSocCode) {
+		super();
+		this.prevailingWageSocCode = prevailingWageSocCode;
+	}
+
 	public String getPrevailingWageSocCode() {
 		return prevailingWageSocCode;
 	}

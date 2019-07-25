@@ -1,4 +1,4 @@
-package blog.dal;
+package perm.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import blog.model.*;
+import perm.model.*;
 
 public class ApplicantsDao {
 	protected ConnectionManager connectionManager;
