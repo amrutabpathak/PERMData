@@ -8,13 +8,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update a User</title>
+<title>Update a Job</title>
 </head>
 <body>
-	<h1>Update BlogUser</h1>
+	<h1>Update Job</h1>
 	<form action="jobupdate" method="post">
 		<p>
-			<label for="jobid">UserName</label>
+			<label for="jobid">JobId</label>
 			<input id="jobid" name="jobid" value="${fn:escapeXml(param.jobid)}">
 		</p>
 		<p>

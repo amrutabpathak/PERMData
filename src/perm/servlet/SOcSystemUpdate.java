@@ -84,6 +84,6 @@ public class SOcSystemUpdate extends HttpServlet {
 	        }
         }
         
-        req.getRequestDispatcher("/SOcSystemUpdate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/SocSystemUpdate.jsp").forward(req, resp);
     }
 }

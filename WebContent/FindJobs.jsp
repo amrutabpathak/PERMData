@@ -95,8 +95,8 @@
 					<td><c:out value="${job.getSocSystem().getPrevailingWageSocCode()}" /></td>
 					<td><c:out value="${job.getNaics().getNaicsCode()}" /></td>
                    
-                    <td><a href="jobdelete?username=<c:out value="${job.getJobId()}"/>">Delete</a></td>
-                    <td><a href="jobupdate?username=<c:out value="${job.getJobId()}"/>">Update</a></td>
+                    <td><a href="jobdelete?jobid=<c:out value="${job.getJobId()}"/>">Delete</a></td>
+                    <td><a href="jobupdate?jobid=<c:out value="${job.getJobId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>

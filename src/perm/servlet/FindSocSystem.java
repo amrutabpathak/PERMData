@@ -87,7 +87,7 @@ public class FindSocSystem extends HttpServlet {
         // Retrieve and validate name.
         // firstname is retrieved from the form POST submission. By default, it
         // is populated by the URL query string (in FindUsers.jsp).
-        String socTitle = req.getParameter("prevailingwagesoctitle");
+        String socTitle = req.getParameter("soctitle");
         if (socTitle == null || socTitle.trim().isEmpty()) {
             messages.put("success", "Please enter a soc Title.");
         } else {
@@ -102,6 +102,6 @@ public class FindSocSystem extends HttpServlet {
         }
         req.setAttribute("socSystems", socSystems);
         
-        req.getRequestDispatcher("/FindSocSystems.jsp").forward(req, resp);
+        req.getRequestDispatcher("/FindSocSystem.jsp").forward(req, resp);
     }
 }

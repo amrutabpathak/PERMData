@@ -47,12 +47,12 @@
 			<input id="requirestraining" name="requirestraining" value="">
 		</p>
 		<p>
-			<label for="trainingMonths">Training Months</label>
-			<input id="trainingMonths" name="trainingMonths" value="">
+			<label for="trainingmonths">Training Months</label>
+			<input id="trainingmonths" name="trainingmonths" value="">
 		</p>
 		<p>
-			<label for="trainingField">Training Field</label>
-			<input id="trainingField" name="trainingField" value="">
+			<label for="trainingfield">Training Field</label>
+			<input id="trainingfield" name="trainingfield" value="">
 		</p>
 		<p>
 			<label for="requiresexp">Requires Exp</label>
@@ -123,8 +123,8 @@
 			<input id="expirationdate" name="expirationdate" value="">
 		</p>
 		<p>
-			<label for="naics">NAICS</label>
-			<input id="naics" name="naics" value="">
+			<label for="naicscode">NAICS</label>
+			<input id="naicscode" name="naicscode" value="">
 		</p>
 		<p>
 			<label for="socsystem">Soc System</label>
