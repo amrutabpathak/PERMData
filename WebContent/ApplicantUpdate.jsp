@@ -14,8 +14,8 @@
 	<h1>Update Applicant</h1>
 	<form action="applicantupdate" method="post">
 		<p>
-			<label for="ApplicantId">ApplicantId</label>
-			<input id="ApplicantId" name="ApplicantId" value="${fn:escapeXml(param.ApplicantId)}">
+			<label for="ApplicantID">ApplicantID</label>
+			<input id="ApplicantID" name="ApplicantID" value="${fn:escapeXml(param.ApplicantID)}">
 		</p>
 		<p>
 			<label for="AdmissionClass">New AdmissionClass</label>

@@ -40,7 +40,7 @@
                     <td><c:out value="${advertisement.getMeans()}" /></td>
                     <td><c:out value="${advertisement.getStartDate()}" /></td>
                     <td><c:out value="${advertisement.getEndDate()}" /></td>
-                    <td><c:out value="${advertisement.getJobId()}" /></td>
+                    <td><c:out value="${advertisement.getJob().getJobId()}" /></td>
                     
                 </tr>
             </c:forEach>

@@ -14,7 +14,7 @@
 	<h1>Update Advertisement</h1>
 	<form action="advertisementupdate" method="post">
 		<p>
-			<label for="AdvertisementId">UserName</label>
+			<label for="AdvertisementId">AdvertisementId</label>
 			<input id="AdvertisementId" name="AdvertisementId" value="${fn:escapeXml(param.AdvertisementId)}">
 		</p>
 		<p>
