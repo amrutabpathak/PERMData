@@ -26,7 +26,7 @@ public class Advertisements {
 		this.advertisementId = advertisementId;
 	}
 
-	public Advertisements(AdvertiseMeans means, Date startDate, Date endDate, Job job) {
+	public Advertisements(AdvertiseMeans means, java.sql.Date startDate, java.sql.Date endDate, Job job) {
 		this.means = means;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -53,7 +53,7 @@ public class Advertisements {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.sql.Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -61,7 +61,7 @@ public class Advertisements {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(java.sql.Date endDate) {
 		this.endDate = endDate;
 	}
 
