@@ -1,5 +1,12 @@
 package perm.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import perm.model.Application;
 
 /**
@@ -36,6 +43,7 @@ public class ApplicationDao {
 	protected ConnectionManager connectionManager;
 
 	private static ApplicationDao instance = null;
+	
 	protected ApplicationDao() {
 		connectionManager = new ConnectionManager();
 	}
@@ -45,40 +53,26 @@ public class ApplicationDao {
 		}
 		return instance;
 	}
-
+	
 	public Application create(Application application) throws SQLException {
-		String insertApplication =
-			"INSERT INTO Application(DecisionDate,CaseStatus,CaseReceivedDate,Refile,OriginalFileDate,Scheduled,EmployerName,ApplicantID,AgentFirmName) " +
-			"VALUES(?,?,?,?,?,?,?,?,?);";
+		String selectApplication = "INSERT INTO Application(CaseNumber,DecistonDate,CaseStatus,CaseReceivedDate,Refile,OriginalFileDate,Scheduled,EmployerName,ApplicantID,AgentFirmName) VALUES(?,?,?,?,?,?,?,?,?,?);";	
 		Connection connection = null;
-		PreparedStatement insertStmt = null;
-		ResultSet resultKey = null;
+		PreparedStatement selectStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			// Application has an auto-generated key. So we want to retrieve that key.
-			insertStmt = connection.prepareStatement(insertApplication,
-				Statement.RETURN_GENERATED_KEYS);
-			insertStmt.setString(1, blogPost.getTitle());
-			// Note: for the sake of simplicity, just set Picture to null for now.
-			insertStmt.setNull(2, Types.BLOB);
-			insertStmt.setString(3, blogPost.getContent());
-			insertStmt.setBoolean(4, blogPost.isPublished());
-			insertStmt.setTimestamp(5, new Timestamp(blogPost.getCreated().getTime()));
-			insertStmt.setString(6, blogPost.getBlogUser().getUserName());
-			insertStmt.executeUpdate();
-			
-			// Retrieve the auto-generated key and set it, so it can be used by the caller.
-			// For more details, see:
-			// http://dev.mysql.com/doc/connector-j/en/connector-j-usagenotes-last-insert-id.html
-			resultKey = insertStmt.getGeneratedKeys();
-			int postId = -1;
-			if(resultKey.next()) {
-				postId = resultKey.getInt(1);
-			} else {
-				throw new SQLException("Unable to retrieve auto-generated key.");
-			}
-			blogPost.setPostId(postId);
-			return blogPost;
+			selectStmt = connection.prepareStatement(selectApplication);
+			selectStmt.setString(1,  application.getCaseNumber());
+			selectStmt.setDate(2,application.getDecistionDate());
+			selectStmt.setString(3, application.getCaseStatus().name());
+			selectStmt.setDate(4, application.getCaseReceivedDate());
+			selectStmt.setBoolean(5,  application.isRefile());			
+			selectStmt.setDate(6, application.getOriginalFileDate());
+			selectStmt.setBoolean(7, application.isScheduled());
+			selectStmt.setString(8, application.getEmployerName());
+			selectStmt.setLong(9, application.getApplicantId());
+			selectStmt.setString(10, application.getAgentFirmName());
+			selectStmt.executeUpdate();
+			return application;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -86,37 +80,28 @@ public class ApplicationDao {
 			if(connection != null) {
 				connection.close();
 			}
-			if(insertStmt != null) {
-				insertStmt.close();
-			}
-			if(resultKey != null) {
-				resultKey.close();
+			if(selectStmt != null) {
+				selectStmt.close();
 			}
 		}
 	}
+	
 
 	/**
-	 * Update the content of the BlogPosts instance.
-	 * This runs a UPDATE statement.
+	 * Update the Scheduled of the Application instance.
 	 */
-	public BlogPosts updateContent(BlogPosts blogPost, String newContent) throws SQLException {
-		String updateBlogPost = "UPDATE BlogPosts SET Content=?,Created=? WHERE PostId=?;";
+	public Application updateScheduled(Application application, boolean scheduled) throws SQLException {
+		String updateSocTitle = "UPDATE SOCSystem SET PrevailingWageSocTitle =? WHERE PrevailingWageSocCode =?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			updateStmt = connection.prepareStatement(updateBlogPost);
-			updateStmt.setString(1, newContent);
-			// Sets the Created timestamp to the current time.
-			Date newCreatedTimestamp = new Date();
-			updateStmt.setTimestamp(2, new Timestamp(newCreatedTimestamp.getTime()));
-			updateStmt.setInt(3, blogPost.getPostId());
+			updateStmt = connection.prepareStatement(updateSocTitle);
+			updateStmt.setString(1, socTitle);
+			updateStmt.setString(2, socSystem.getPrevailingWageSocCode());
 			updateStmt.executeUpdate();
-
-			// Update the blogPost param before returning to the caller.
-			blogPost.setContent(newContent);
-			blogPost.setCreated(newCreatedTimestamp);
-			return blogPost;
+			socSystem.setPrevailingWageSocTitle(socTitle);
+			return socSystem;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -130,24 +115,21 @@ public class ApplicationDao {
 		}
 	}
 
+
 	/**
-	 * Delete the BlogPosts instance.
-	 * This runs a DELETE statement.
+	 * Delete the Application instance.
 	 */
-	public BlogPosts delete(BlogPosts blogPost) throws SQLException {
-		// Note: BlogComments has a fk constraint on BlogPosts with the reference option
-		// ON DELETE CASCADE. So this delete operation will delete all the referencing
-		// BlogComments.
-		String deleteBlogPost = "DELETE FROM BlogPosts WHERE PostId=?;";
+	public Application delete(Application application) throws SQLException {
+		String deleteApplication = "DELETE FROM Application WHERE CaseNumber =?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			deleteStmt = connection.prepareStatement(deleteBlogPost);
-			deleteStmt.setInt(1, blogPost.getPostId());
+			deleteStmt = connection.prepareStatement(deleteApplication);
+			deleteStmt.setString(1, application.getCaseNumber());
 			deleteStmt.executeUpdate();
 
-			// Return null so the caller can no longer operate on the BlogPosts instance.
+			// Return null so the caller can no longer operate on the Persons instance.
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,40 +144,38 @@ public class ApplicationDao {
 		}
 	}
 
+	
+	
+
 	/**
-	 * Get the BlogPosts record by fetching it from your MySQL instance.
-	 * This runs a SELECT statement and returns a single BlogPosts instance.
-	 * Note that we use BlogUsersDao to retrieve the referenced BlogUsers instance.
-	 * One alternative (possibly more efficient) is using a single SELECT statement
-	 * to join the BlogPosts, BlogUsers tables and then build each object.
+	 * Get the Application record by fetching it from your MySQL instance.
+	 * This runs a SELECT statement and returns a single Application instance.
 	 */
-	public BlogPosts getBlogPostById(int postId) throws SQLException {
-		String selectBlogPost =
-			"SELECT PostId,Title,Picture,Content,Published,Created,UserName " +
-			"FROM BlogPosts " +
-			"WHERE PostId=?;";
+	public Application getApplicationFromCaseNumber(String caseNumber) throws SQLException {
+		String selectApplication = "SELECT CaseNumber, DecisionDate ,CaseStatus ,CaseReceivedDate ," + 
+				"Refile ,OriginalFileDate ,Scheduled ,EmployerName ," + 
+				"ApplicantID ,AgentFirmName FROM Application WHERE CaseNumber =?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		try {
 			connection = connectionManager.getConnection();
-			selectStmt = connection.prepareStatement(selectBlogPost);
-			selectStmt.setInt(1, postId);
+			selectStmt = connection.prepareStatement(selectApplication);
+			selectStmt.setString(1, caseNumber);
 			results = selectStmt.executeQuery();
-			BlogUsersDao blogUsersDao = BlogUsersDao.getInstance();
 			if(results.next()) {
-				int resultPostId = results.getInt("PostId");
-				String title = results.getString("Title");
-				String picture = results.getString("Picture");
-				String content = results.getString("Content");
-				boolean published = results.getBoolean("Published");
-				Date created =  new Date(results.getTimestamp("Created").getTime());
-				String userName = results.getString("UserName");
+				String resultCaseNumber = results.getString("CaseNumber");
+				Date decistionDate = results.getDate("DecistionDate");
+				Application.CaseStatus caseStatus = Application.CaseStatus.valueOf(results.getString("CaseStatus"));
+				Date caseReceivedDate = results.getDate("caseReceivedDate");
+				boolean refile = results.getBoolean("Refile");
+				Date originalFileDate = results.getDate("OriginalFileDate");
+				boolean scheduled = results.getBoolean("Scheduled");
+				String employerName = results.getString("EmployerName");
+				long applicantId= results.getLong("ApplicantId");
+				String agentFirmName = results.getString("AgentFirmName");
+				return new Application(resultCaseNumber, decistionDate, caseStatus, caseReceivedDate, refile, originalFileDate, scheduled, employerName, applicantId, agentFirmName);
 				
-				BlogUsers blogUser = blogUsersDao.getBlogUserFromUserName(userName);
-				BlogPosts blogPost = new BlogPosts(resultPostId, title, picture, content,
-					published, created, blogUser);
-				return blogPost;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -214,49 +194,6 @@ public class ApplicationDao {
 		return null;
 	}
 
-	/**
-	 * Get the all the BlogPosts for a user.
-	 */
-	public List<BlogPosts> getBlogPostsForUser(BlogUsers blogUser) throws SQLException {
-		List<BlogPosts> blogPosts = new ArrayList<BlogPosts>();
-		String selectBlogPosts =
-			"SELECT PostId,Title,Picture,Content,Published,Created,UserName " +
-			"FROM BlogPosts " +
-			"WHERE UserName=?;";
-		Connection connection = null;
-		PreparedStatement selectStmt = null;
-		ResultSet results = null;
-		try {
-			connection = connectionManager.getConnection();
-			selectStmt = connection.prepareStatement(selectBlogPosts);
-			selectStmt.setString(1, blogUser.getUserName());
-			results = selectStmt.executeQuery();
-			while(results.next()) {
-				int postId = results.getInt("PostId");
-				String title = results.getString("Title");
-				String picture = results.getString("Picture");
-				String content = results.getString("Content");
-				boolean published = results.getBoolean("Published");
-				Date created =  new Date(results.getTimestamp("Created").getTime());
-				BlogPosts blogPost = new BlogPosts(postId, title, picture, content, published,
-					created, blogUser);
-				blogPosts.add(blogPost);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if(connection != null) {
-				connection.close();
-			}
-			if(selectStmt != null) {
-				selectStmt.close();
-			}
-			if(results != null) {
-				results.close();
-			}
-		}
-		return blogPosts;
-	}
+
 
 }
