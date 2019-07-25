@@ -1,4 +1,4 @@
-package blog.dal;
+package perm.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.sql.Timestamp;
 
-import blog.model.*;
-import blog.model.Advertisements.AdvertiseMeans;
+import perm.model.*;
 
 public class AdvertisementsDao {
 	protected ConnectionManager connectionManager;

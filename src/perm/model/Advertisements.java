@@ -1,4 +1,4 @@
-package blog.model;
+package perm.dao;
 
 import java.util.Date;
 
