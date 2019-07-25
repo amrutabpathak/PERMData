@@ -8,19 +8,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update an Employer</title>
+<title>Create an Agent</title>
 </head>
 <body>
-	<h1>Update BlogUser</h1>
-	<form action="employerupdate" method="post">
+	<h1>Create Agent</h1>
+	<form action="agentcreate" method="post">
 		<p>
-			<label for="employername">EmployerName</label>
-			<input id="employername" name="employername" value="${fn:escapeXml(param.employername)}">
+			<label for="agentname">AgentName</label>
+			<input id="agentname" name="agentname" value="">
 		</p>
-
 		<p>
-			<label for="NumOfEmployee">New NumOfEmployee</label>
-			<input id="NumOfEmployee" name="NumOfEmployee" value="">
+			<label for="City">City</label>
+			<input id="City" name="City" value="">
+		</p>
+		<p>
+			<label for="State">State</label>
+			<input id="State" name="State" value="">
 		</p>
 
 		<p>

@@ -8,28 +8,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update an Employer</title>
+<title>Delete an Agent</title>
 </head>
 <body>
-	<h1>Update BlogUser</h1>
-	<form action="employerupdate" method="post">
+	<h1>${messages.title}</h1>
+	<form action="agentdelete" method="post">
 		<p>
-			<label for="employername">EmployerName</label>
-			<input id="employername" name="employername" value="${fn:escapeXml(param.employername)}">
+			<div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
+				<label for="agentname">AgentName</label>
+				<input id="agentname" name="agentname" value="${fn:escapeXml(param.agentname)}">
+			</div>
 		</p>
-
 		<p>
-			<label for="NumOfEmployee">New NumOfEmployee</label>
-			<input id="NumOfEmployee" name="NumOfEmployee" value="">
-		</p>
-
-		<p>
+			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
 			<input type="submit">
+			</span>
 		</p>
 	</form>
 	<br/><br/>
-	<p>
-		<span id="successMessage"><b>${messages.success}</b></span>
-	</p>
+	
 </body>
 </html>

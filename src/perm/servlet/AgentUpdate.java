@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/employerupdate")
-public class EmployerUpdate extends HttpServlet {
+@WebServlet("/agentupdate")
+public class AgentUpdate extends HttpServlet {
 	
-	protected EmployerDao EmployerDao;
+	protected AgentDao agentDao;
 	
 	@Override
 	public void init() throws ServletException {
-		EmployerDao = BlogUsersDao.getInstance();
+		agentDao = AgentDao.getInstance();
 	}
 	
 	@Override
@@ -34,23 +34,23 @@ public class EmployerUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        String employerName = req.getParameter("employername");
-        if (employerName == null || employerName.trim().isEmpty()) {
+        String agentName = req.getParameter("agentname");
+        if (agentName == null || agentName.trim().isEmpty()) {
             messages.put("success", "Please enter a valid UserName.");
         } else {
         	try {
-        		Employer employer = EmployerDao.getEmployerByName(employerName);
-        		if(employer == null) {
+        		Agent agent = agentDao.getAgentByName(agentName);
+        		if(agent == null) {
         			messages.put("success", "UserName does not exist.");
         		}
-        		req.setAttribute("agentDao", employer);
+        		req.setAttribute("agent", agent);
         	} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 	        }
         }
         
-        req.getRequestDispatcher("/EmployerUpdate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/AgentUpdate.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -61,32 +61,32 @@ public class EmployerUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        String name = req.getParameter("employername");
+        String name = req.getParameter("agentname");
         if (name == null || name.trim().isEmpty()) {
             messages.put("success", "Please enter a valid UserName.");
         } else {
 
-        		Employer employer = EmployerDao.getEmployerByName(name);
-        		if(employer == null) {
+        		Agent agent = agentDao.getAgentByName(name);
+        		if(agent == null) {
         			messages.put("success", "UserName does not exist. No update to perform.");
         		} else {
 
-					int numOfEmployee = Integer.parseInt(req.getParameter("NumOfEmployee"));
+					String city = req.getParameter("city"));
 
 
 					try {
 
-						employer = employerDao.updateEmployer(employer,numOfEmployee);
+						agent = agentDao.updateAgent(agent,city);
 						messages.put("success", "Successfully created " + name);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						throw new IOException(e);
 					}
         		}
-        		req.setAttribute("agentDao", employer);
+        		req.setAttribute("agent", agent);
 
         }
         
-        req.getRequestDispatcher("/EmployerUpdate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/AgentUpdate.jsp").forward(req, resp);
     }
 }

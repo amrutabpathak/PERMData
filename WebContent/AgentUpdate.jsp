@@ -8,19 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update an Employer</title>
+<title>Update an Agent</title>
 </head>
 <body>
-	<h1>Update BlogUser</h1>
-	<form action="employerupdate" method="post">
+	<h1>Update Agent</h1>
+	<form action="agentupdate" method="post">
 		<p>
-			<label for="employername">EmployerName</label>
-			<input id="employername" name="employername" value="${fn:escapeXml(param.employername)}">
+			<label for="agentname">AgentName</label>
+			<input id="agentname" name="agentname" value="${fn:escapeXml(param.agentname)}">
 		</p>
 
 		<p>
-			<label for="NumOfEmployee">New NumOfEmployee</label>
-			<input id="NumOfEmployee" name="NumOfEmployee" value="">
+			<label for="city">New City</label>
+			<input id="city" name="city" value="">
 		</p>
 
 		<p>

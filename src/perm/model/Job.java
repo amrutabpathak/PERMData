@@ -1,6 +1,8 @@
 package perm.model;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Job {
 
@@ -36,7 +38,29 @@ public class Job {
 	protected SOCSystem socSystem;
 	
 	public enum EducationLevel {
-		HighSchool,Associate,Bachelor,Master,Doctorate,None,Other
+		HighSchool("High School"),Associate("Associate\'s"),Bachelor("Bachelor\'s"),Master("Master\'s"),Doctorate("Doctorate"),None("None"),Other("Other");
+	
+		private String educationLevelValue;
+
+	    private EducationLevel(String educationLevelValue) {
+	        this.educationLevelValue = educationLevelValue;
+	    }
+
+	    public String educationLevelValue() {
+	        return educationLevelValue;
+	    }
+	    
+	    private static final Map<String,EducationLevel> educationLevelLookup = 
+				new HashMap();
+	     static {
+	         //Create reverse lookup hash map 
+	         for(EducationLevel l : EducationLevel.values())
+	        	 educationLevelLookup.put(l.educationLevelValue, l);
+	     }
+	     
+	     public static EducationLevel get(String val) { 
+	           return educationLevelLookup.get(val); 
+	      }
 	}
 
 	public enum AspectRequired {
@@ -44,15 +68,82 @@ public class Job {
 	}
 	
 	public enum PayUnit {
-		Hour, Week, BiWeekly, Month, Year
+		Hour("Hour"), Week("Week"), BiWeekly("Bi-weekly"), Month("Month"), Year("Year");
+		
+		private String payUnitValues;
+
+	    private PayUnit(String payUnitValues) {
+	        this.payUnitValues = payUnitValues;
+	    }
+
+	    public String payUnitValues() {
+	        return payUnitValues;
+	    }
+	    
+	    private static final Map<String,PayUnit> payUnitLookup = 
+				new HashMap();
+	     static {
+	         //Create reverse lookup hash map 
+	         for(PayUnit l : PayUnit.values())
+	        	 payUnitLookup.put(l.payUnitValues, l);
+	     }
+	     
+	     public static PayUnit get(String val) { 
+	           return payUnitLookup.get(val); 
+	      }
 	}
 	
 	public enum Level {
-		LevelI, LevelII, LevelIII, LevelIV, NA
+		LevelI("Level I"), LevelII("Level II"), LevelIII("Level III"), LevelIV("Level IV"), NA("N/A");
+		
+		private String levelValue;
+
+	    private Level(String levelValues) {
+	        this.levelValue = levelValues;
+	    }
+
+	    public String levelValue() {
+	        return levelValue;
+	    }
+	    
+	    private static final Map<String,Level> levelLookup = 
+				new HashMap();
+	     static {
+	         //Create reverse lookup hash map 
+	         for(Level l : Level.values())
+	        	 levelLookup.put(l.levelValue, l);
+	     }
+	     
+	     public static Level get(String val) { 
+	           return levelLookup.get(val); 
+	      }
 	}
 	
 	public enum Source {
-		CBA, DBA, EmployerConducted, OES, Other, SCA	
+		CBA("CBA"), DBA("DBA"), EmployerConducted("Employer Conducted"), OES("OES"), Other("Other"), SCA("SCA");
+		
+		private String sourceValue;
+
+	    private Source(String sourceValue) {
+	        this.sourceValue = sourceValue;
+	    }
+
+	    public String sourceValue() {
+	        return sourceValue;
+	    }
+	    
+	    private static final Map<String,Source> sourceLookup = 
+				new HashMap();
+	     static {
+	         //Create reverse lookup hash map 
+	         for(Source l : Source.values())
+	        	 sourceLookup.put(l.sourceValue, l);
+	     }
+	     
+	     public static Source get(String val) { 
+	           return sourceLookup.get(val); 
+	      }
+		
 	}
 
 	public Job(long jobId, String city, String state, String code, String jobTitle, EducationLevel education,
@@ -137,6 +228,11 @@ public class Job {
 		this.expirationDate = expirationDate;
 		this.naics = naics;
 		this.socSystem = socSystem;
+	}
+
+	
+	public Job() {
+		super();
 	}
 
 	public long getJobId() {

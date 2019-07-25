@@ -1,6 +1,6 @@
 package perm.dao;
 
-import perm.model.Employer;
+import perm.model.Agent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,46 +8,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class EmployerDao {
-    private static EmployerDao singletonInstance = null;
+public class AgentDao {
+    private static AgentDao singletonInstance = null;
 
     private ConnectionManager connectionManager;
 
-    private EmployerDao() {
+    private AgentDao() {
         connectionManager = new ConnectionManager();
     }
 
-    public synchronized static EmployerDao getInstance() {
+    public synchronized static AgentDao getInstance() {
         if(singletonInstance == null) {
-            return new EmployerDao();
+            return new AgentDao();
         } else {
             return singletonInstance;
         }
     }
 
-    public Employer create(Employer employer) throws SQLException {
-        String insert = "INSERT INTO Employer(Name, Address1, Address2, City, State, Country, PostalCode, Phone, PhoneExt, NumOfEmployee, EstablishedYear, FwOwnership)" +
-                "values(?,?,?,?,?,?,?,?,?,?,?,?);";
+    public Agent create(Agent agent) throws SQLException {
+        String insert = "INSERT INTO Agent(FirmName, City, State)" +
+                "values(?,?,?);";
         Connection connection = null;
         PreparedStatement statement = null;
         try{
             connection = connectionManager.getConnection();
             statement = connection.prepareStatement(insert);
-            statement.setString(1,employer.getName());
-            statement.setString(2,employer.getAddress1());
-            statement.setString(3,employer.getAddress2());
-            statement.setString(4,employer.getCity());
-            statement.setString(5,employer.getState());
-            statement.setString(6,employer.getCountry());
-            statement.setInt(7,employer.getPostalCode());
-            statement.setString(8,employer.getPhone());
-            statement.setInt(9,employer.getPhoneExt());
-            statement.setInt(10,employer.getNumOfEmployee());
-            statement.setInt(11,employer.getEstablishedYear());
-            statement.setBoolean(12,employer.isFwOwnershipInterest());
+            statement.setString(1,agent.getFirmName());
+            statement.setString(2,agent.getCity());
+            statement.setString(3,agent.getState());
 
             statement.executeUpdate();
-            return employer;
+            return agent;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -62,9 +53,9 @@ public class EmployerDao {
     }
 
 
-    public Employer getEmployerByName(String employerName) throws SQLException {
-        String select = "select Name, Address1, Address2, City, State, Country, PostalCode, Phone, PhoneExt, NumOfEmployee, EstablishedYear, FwOwnership " +
-                "from Employer " +
+    public Agent getAgentByName(String agentName) throws SQLException {
+        String select = "select FirmName, City, State " +
+                "from Agent " +
                 "where Name = ?";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -72,22 +63,14 @@ public class EmployerDao {
         try {
             connection = connectionManager.getConnection();
             statement = connection.prepareStatement(select);
-            statement.setString(1,employerName);
+            statement.setString(1,agentName);
             resultSet = statement.executeQuery();
             if(resultSet.next()) {
-                String name = resultSet.getString("Name");
-                String address1 = resultSet.getString("Address1");
-                String address2 = resultSet.getString("Address2");
+                String name = resultSet.getString("FirmName");
                 String city = resultSet.getString("City");
                 String state = resultSet.getString("State");
-                String country = resultSet.getString("Country");
-                int postalCode = resultSet.getInt("PostalCode");
-                String phone = resultSet.getString("Phone");
-                int phoneExt = resultSet.getInt("PhoneExt");
-                int numOfEmployee = resultSet.getInt("NumOfEmployee");
-                int establishedYear = resultSet.getInt("EstablishedYear");
-                boolean fwOwnership = resultSet.getBoolean("FwOwnership");
-                return new Employer(name,address1,address2,city,state,country,postalCode,phone,phoneExt,numOfEmployee,establishedYear,fwOwnership);
+
+                return new Agent(name,city,state);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,18 +89,18 @@ public class EmployerDao {
         return null;
     }
 
-    public Employer updateEmployer(Employer employer, int numOfEmployee) throws SQLException {
-        String update = "update Employer set NumOfEmployee = ? where Name =?;";
+    public Agent updateAgent(Agent agent, String city) throws SQLException {
+        String update = "update Agent set city = ? where FirmName =?;";
         Connection connection = null;
         PreparedStatement statement = null;
         try{
             connection = connectionManager.getConnection();
             statement = connection.prepareStatement(update);
-            statement.setInt(1,numOfEmployee);
-            statement.setString(2,employer.getName());
+            statement.setString(1,city);
+            statement.setString(2,agent.getFirmName());
             statement.executeUpdate();
-            employer.setNumOfEmployee(numOfEmployee);
-            return employer;
+            agent.setCity(city);
+            return agent;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -130,14 +113,14 @@ public class EmployerDao {
             }
         }
     }
-    public Employer delete(Employer employer) throws SQLException {
-        String deleteStatement = "DELETE FROM Employer WHERE Name=?;";
+    public Agent delete(Agent agent) throws SQLException {
+        String deleteStatement = "DELETE FROM Agent WHERE Name=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {
             connection = connectionManager.getConnection();
             deleteStmt = connection.prepareStatement(deleteStatement);
-            deleteStmt.setString(1, employer.getName());
+            deleteStmt.setString(1, agent.getFirmName());
             deleteStmt.executeUpdate();
 
             // Return null so the caller can no longer operate on the Persons instance.

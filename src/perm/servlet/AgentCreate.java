@@ -19,14 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/employercreate")
-public class EmployerCreate extends HttpServlet {
+@WebServlet("/agentcreate")
+public class AgentCreate extends HttpServlet {
 	
-	protected EmployerDao employerDao;
+	protected AgentDao agentDao;
 	
 	@Override
 	public void init() throws ServletException {
-		employerDao = EmployerDao.getInstance();
+		agentDao = AgentDao.getInstance();
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class EmployerCreate extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         //Just render the JSP.   
-        req.getRequestDispatcher("/EmployerCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/AgentCreate.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -47,27 +47,18 @@ public class EmployerCreate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String name = req.getParameter("employername");
+        String name = req.getParameter("agentname");
         if (name == null || name.trim().isEmpty()) {
             messages.put("success", "Invalid UserName");
         } else {
         	// Create the BlogUser.
-        	String name = req.getParameter("employername");
-        	String address1 = req.getParameter("Address1");
-			String address2 = req.getParameter("Address2");
+        	String name = req.getParameter("agentname");
 			String city = req.getParameter("City");
 			String state = req.getParameter("State");
-			String country = req.getParameter("Country");
-			int postalCode = Integer.parseInt(req.getParameter("PostalCode"));
-			String phone = req.getParameter("Phone");
-			int phoneExt = Integer.parseInt(req.getParameter("PhoneExt"));
-			int numOfEmployee = Integer.parseInt(req.getParameter("NumOfEmployee"));
-			int establishedYear = Integer.parseInt(req.getParameter("EstablishedYear"));
-			boolean fwOwnerShip = req.getParameter("FwOwnership").equals("true")? true: false;
 	        try {
 	        	// Exercise: parse the input for StatusLevel.
-	        	Employer employer = new Employer(name, address1, address2, city, state,country,postalCode,phone,phoneExt,numOfEmployee,establishedYear,fwOwnerShip);
-	        	employer = employerDao.create(employer);
+	        	Agent agent = new Agent(name, city, state);
+	        	agent = agentDao.create(agent);
 	        	messages.put("success", "Successfully created " + name);
 	        } catch (SQLException e) {
 				e.printStackTrace();
@@ -75,6 +66,6 @@ public class EmployerCreate extends HttpServlet {
 	        }
         }
         
-        req.getRequestDispatcher("/EmployerCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/AgentCreate.jsp").forward(req, resp);
     }
 }
