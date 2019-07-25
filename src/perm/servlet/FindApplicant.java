@@ -6,6 +6,7 @@ import perm.model.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,7 @@ protected ApplicantsDao applicantDao;
         	
         	messages.put("previousBirthCountry", birthCountry);
         }
-        req.setAttribute("applicants", applicants);
+        req.setAttribute("applicants",applicants);
         
         req.getRequestDispatcher("/FindApplicant.jsp").forward(req, resp);
 	}

@@ -35,7 +35,7 @@ public class FindAgent extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Agent> agent = new ArrayList<Employer>();
+        List<Agent> agent = new ArrayList<Agent>();
         
         // Retrieve and validate name.
         // firstname is retrieved from the URL query string.
@@ -45,7 +45,10 @@ public class FindAgent extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	agent = agentDao.getAgentByName(name);
+            	Agent temp = agentDao.getAgentByName(name);
+            	List<Agent> tempList = new ArrayList<>();
+            	tempList.add(temp);
+            	agent = tempList;
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
@@ -55,6 +58,13 @@ public class FindAgent extends HttpServlet {
         	// in the input box when rendering FindUsers.jsp.
         	messages.put("previousFirstName", name);
         }
+        if(!agent.isEmpty()) {
+            System.out.println("~~~~~");
+            System.out.println(agent.get(0).getFirmName());
+            System.out.println(agent.get(0).getCity());
+            System.out.println(agent.get(0).getState());
+        }
+
         req.setAttribute("agents", agent);
         
         req.getRequestDispatcher("/FindAgent.jsp").forward(req, resp);
@@ -78,7 +88,10 @@ public class FindAgent extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	agent = agentDao.getAgentByName(name);
+                Agent temp = agentDao.getAgentByName(name);
+                List<Agent> tempList = new ArrayList<>();
+                tempList.add(temp);
+                agent = tempList;
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);

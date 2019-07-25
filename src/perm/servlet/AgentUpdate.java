@@ -66,12 +66,17 @@ public class AgentUpdate extends HttpServlet {
             messages.put("success", "Please enter a valid UserName.");
         } else {
 
-        		Agent agent = agentDao.getAgentByName(name);
-        		if(agent == null) {
+			Agent agent = null;
+			try {
+				agent = agentDao.getAgentByName(name);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if(agent == null) {
         			messages.put("success", "UserName does not exist. No update to perform.");
         		} else {
 
-					String city = req.getParameter("city"));
+					String city = req.getParameter("city");
 
 
 					try {

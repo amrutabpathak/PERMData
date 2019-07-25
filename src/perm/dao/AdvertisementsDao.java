@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -37,8 +38,8 @@ public class AdvertisementsDao {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertAdvertisement, Statement.RETURN_GENERATED_KEYS);
 			insertStmt.setString(1, advertisement.getMeans().name());
-			insertStmt.setDate(2, (java.sql.Date) advertisement.getStartDate());
-			insertStmt.setDate(3, (java.sql.Date)advertisement.getEndDate());
+			insertStmt.setDate(2, new java.sql.Date(advertisement.getStartDate().getTime()));
+			insertStmt.setDate(3, new java.sql.Date(advertisement.getEndDate().getTime()));
 			insertStmt.setLong(4, advertisement.getJob().getJobId());
 			insertStmt.executeUpdate();
 
@@ -136,8 +137,8 @@ public class AdvertisementsDao {
 			if (results.next()) {
 				int resultAdvertisementId = results.getInt("AdvertisementId");
 				Advertisements.AdvertiseMeans means = Advertisements.AdvertiseMeans.valueOf(results.getString("Means"));
-				Date start = results.getTime("StartDate");
-				Date end = results.getTime("EndState");
+				java.sql.Date start = results.getDate("StartDate");
+				java.sql.Date end = results.getDate("EndDate");
 				long jobId = results.getLong("JobId");
 				Job job = jobsDao.getJobById(jobId);
 				Advertisements advertisement = new Advertisements(resultAdvertisementId,means,start,end,job);

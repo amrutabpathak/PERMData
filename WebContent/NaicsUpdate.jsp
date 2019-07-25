@@ -8,32 +8,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create an Advertisement</title>
+<title>Update a Naics</title>
 </head>
 <body>
-	<h1>Create Advertisement</h1>
-	<form action="advertisementcreate" method="post">
+	<h1>Update Naics</h1>
+	<form action="naicsupdate" method="post">
 		<p>
-			<label for="AdvertisementId">AdvertisementId</label>
-			<input id="AdvertisementId" name="AdvertisementId" value="">
+			<label for="naicscode">NaicsCode</label>
+			<input id="naicscode" name="naicscode" value="${fn:escapeXml(param.naicscode)}">
 		</p>
+
 		<p>
-			<label for="Means">Means</label>
-			<input id="Means" name="Means" value="">
+			<label for="naicstitle">NaicsTitle</label>
+			<input id="naicstitle" name="naicstitle" value="">
 		</p>
-		
-		<p>
-			<label for="StartDate">StartDate (yyyy-mm-dd)</label>
-			<input id="StartDate" name="StartDate" value="">
-		</p>
-		<p>
-			<label for="EndDate">EndDate (yyyy-mm-dd)</label>
-			<input id="EndDate" name="EndDate" value="">
-		</p>
-		<p>
-			<label for="JobID">JobID</label>
-			<input id="JobID" name="JobID" value="">
-		</p>
+
 		<p>
 			<input type="submit">
 		</p>

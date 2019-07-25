@@ -8,15 +8,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delete a User</title>
+<title>Delete a Naicsm</title>
 </head>
 <body>
 	<h1>${messages.title}</h1>
-	<form action="userdelete" method="post">
+	<form action="naicsdelete" method="post">
 		<p>
 			<div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-				<label for="username">UserName</label>
-				<input id="username" name="username" value="${fn:escapeXml(param.username)}">
+				<label for="naicscode">NaicsCode</label>
+				<input id="naicscode" name="naicscode" value="${fn:escapeXml(param.naicscode)}">
 			</div>
 		</p>
 		<p>

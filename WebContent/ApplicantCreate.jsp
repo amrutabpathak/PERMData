@@ -15,6 +15,10 @@
 	<form action="applicantcreate" method="post">
 		
 		<p>
+			<label for="ApplicantID">ApplicantID</label>
+			<input id="ApplicantID" name="ApplicantID" value="">
+		</p>
+		<p>
 			<label for="City">City</label>
 			<input id="City" name="City" value="">
 		</p>
@@ -66,7 +70,7 @@
 		
 		<p>
 			<label for="EmployerName">EmployerName</label>
-			<input id=""EmployerName"" name="EmployerName" value="">
+			<input id="EmployerName" name="EmployerName" value="">
 		</p>
 
 		<p>

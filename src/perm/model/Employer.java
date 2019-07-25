@@ -1,4 +1,4 @@
-package perm.dao;
+package perm.model;
 
 public class Employer {
     private String name;
@@ -27,6 +27,10 @@ public class Employer {
         this.numOfEmployee = numOfEmployee;
         this.establishedYear = establishedYear;
         this.fwOwnershipInterest = fwOwnershipInterest;
+    }
+
+    public Employer(String name) {
+        this.name = name;
     }
 
     public String getName() {

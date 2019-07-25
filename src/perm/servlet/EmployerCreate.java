@@ -52,7 +52,7 @@ public class EmployerCreate extends HttpServlet {
             messages.put("success", "Invalid UserName");
         } else {
         	// Create the BlogUser.
-        	String name = req.getParameter("employername");
+        	String employerName = req.getParameter("employername");
         	String address1 = req.getParameter("Address1");
 			String address2 = req.getParameter("Address2");
 			String city = req.getParameter("City");
@@ -66,9 +66,9 @@ public class EmployerCreate extends HttpServlet {
 			boolean fwOwnerShip = req.getParameter("FwOwnership").equals("true")? true: false;
 	        try {
 	        	// Exercise: parse the input for StatusLevel.
-	        	Employer employer = new Employer(name, address1, address2, city, state,country,postalCode,phone,phoneExt,numOfEmployee,establishedYear,fwOwnerShip);
+	        	Employer employer = new Employer(employerName, address1, address2, city, state,country,postalCode,phone,phoneExt,numOfEmployee,establishedYear,fwOwnerShip);
 	        	employer = employerDao.create(employer);
-	        	messages.put("success", "Successfully created " + name);
+	        	messages.put("success", "Successfully created " + employerName);
 	        } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);

@@ -73,7 +73,7 @@ public class AdvertisementUpdate extends HttpServlet {
         	        } else {
         	        	
         	        	advertisement = advertisementDao.updateAdvertisementMeans(advertisement, newMeans);
-        	        	messages.put("success", "Successfully updated " + advertisementId);
+        	        	messages.put("success", "Successfully updated AdvertisementId " + advertisementId);
         	        }
         		}
         		req.setAttribute("advertisement",advertisement);

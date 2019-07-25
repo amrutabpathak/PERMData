@@ -8,14 +8,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find an Agent</title>
+<title>Find a Naics</title>
 </head>
 <body>
-	<form action="findagent" method="get">
-		<h1>Search for a Employer by Name</h1>
+	<form action="findsocsystem" method="post">
+		<h1>Search for a Naics by Naics Code</h1>
 		<p>
-			<label for="agentname">AgentName</label>
-			<input id="agentname" name="agentname" value="${fn:escapeXml(param.agentname)}">
+			<label for="naicscode">SOC Title</label>
+			<input id="naicscode" name="naicscode" value="${fn:escapeXml(param.naicscode)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -23,19 +23,17 @@
 			<span id="successMessage"><b>${messages.success}</b></span>
 		</p>
 	</form>
-
-	<h1>Matching Agent</h1>
+	
+	<h1>Matching Naics Details</h1>
         <table border="1">
             <tr>
-                <th>Name</th>
-                <th>City</th>
-                <th>State</th>
+                <th>NaicsCode</th>
+                <th>NaicsTitle</th>
             </tr>
-            <c:forEach items="${agents}" var="agent" >
+            <c:forEach items="${naics}" var="naics" >
                 <tr>
-                    <th><c:out value="${agent.getFirmName()}" /></th>
-                    <th><c:out value="${agent.getCity()}" /></th>
-                    <th><c:out value="${agent.getState()}" /></th>
+                    <td><c:out value="${naics.getNaicsCode()}" /></td>
+                    <td><c:out value="${naics.getNaicsTitle()}" /></td>                    
                 </tr>
             </c:forEach>
        </table>

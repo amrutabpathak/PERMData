@@ -17,8 +17,30 @@ public class Applicants {
 	protected Employer employer;
 	
 	public enum EducationLevel {
-		HighSchool,Associate,Bachelor,Master,Doctorate,None,Other
+		HighSchool("High School"),
+		Associate("Associate's"),
+		Bachelor("Bachelor's"),
+		Master("Master's"),
+		Doctorate("Doctorate"),
+		None("None"),
+		Other("Other");
+		
+	    private String name;
+
+	    EducationLevel(String name) {
+	        this.name = name;
+	    }
+
+	    public static EducationLevel fromString(String s) {
+	    	for (EducationLevel e : values()) {
+	    		if (e.name.equals(s)) {
+	    			return e;
+	    		}
+	    	}
+	    	return Other;
+    	}
 	}
+
 
 	public Applicants(long applicantId, String city, String state, String code, String citizenship, String birthCountry,
 			String admissionClass, EducationLevel education, String educationOther, String major, String yearCompleted,

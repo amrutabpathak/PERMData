@@ -8,31 +8,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create an Advertisement</title>
+<title>Create a Naics</title>
 </head>
 <body>
-	<h1>Create Advertisement</h1>
-	<form action="advertisementcreate" method="post">
+	<h1>Create Naics</h1>
+	<form action="naicscreate" method="post">
 		<p>
-			<label for="AdvertisementId">AdvertisementId</label>
-			<input id="AdvertisementId" name="AdvertisementId" value="">
+			<label for="naicscode">NaicsCode</label>
+			<input id="naicscode" name="naicscode" value="">
 		</p>
 		<p>
-			<label for="Means">Means</label>
-			<input id="Means" name="Means" value="">
-		</p>
-		
-		<p>
-			<label for="StartDate">StartDate (yyyy-mm-dd)</label>
-			<input id="StartDate" name="StartDate" value="">
-		</p>
-		<p>
-			<label for="EndDate">EndDate (yyyy-mm-dd)</label>
-			<input id="EndDate" name="EndDate" value="">
-		</p>
-		<p>
-			<label for="JobID">JobID</label>
-			<input id="JobID" name="JobID" value="">
+			<label for="naicstitle">NaicsTitle</label>
+			<input id="naicstitle" name="naicstitle" value="">
 		</p>
 		<p>
 			<input type="submit">

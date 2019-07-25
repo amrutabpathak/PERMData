@@ -4,6 +4,7 @@ import perm.dao.*;
 import perm.model.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class FindAdvertisement extends HttpServlet {
         	messages.put("success", "Displaying results for " + advertisementId);
       
         }
-        req.setAttribute("advertisement", advertisement);
+        req.setAttribute("advertisements", Arrays.asList(advertisement));
         
         req.getRequestDispatcher("/FindAdvertisement.jsp").forward(req, resp);
 	}

@@ -8,32 +8,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create an Advertisement</title>
+<title>Update an Application</title>
 </head>
 <body>
-	<h1>Create Advertisement</h1>
-	<form action="advertisementcreate" method="post">
+	<h1>Update Application</h1>
+	<form action="applicationupdate" method="post">
 		<p>
-			<label for="AdvertisementId">AdvertisementId</label>
-			<input id="AdvertisementId" name="AdvertisementId" value="">
+			<label for="casenumber">CaseNumber</label>
+			<input id="casenumber" name="casenumber" value="${fn:escapeXml(param.casenumber)}">
 		</p>
+
 		<p>
-			<label for="Means">Means</label>
-			<input id="Means" name="Means" value="">
+			<label for="scheduled">Scheduled</label>
+			<input id="scheduled" name="scheduled" value="">
 		</p>
-		
-		<p>
-			<label for="StartDate">StartDate (yyyy-mm-dd)</label>
-			<input id="StartDate" name="StartDate" value="">
-		</p>
-		<p>
-			<label for="EndDate">EndDate (yyyy-mm-dd)</label>
-			<input id="EndDate" name="EndDate" value="">
-		</p>
-		<p>
-			<label for="JobID">JobID</label>
-			<input id="JobID" name="JobID" value="">
-		</p>
+
 		<p>
 			<input type="submit">
 		</p>

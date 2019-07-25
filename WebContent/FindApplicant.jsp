@@ -11,11 +11,11 @@
 <title>Find Applicants</title>
 </head>
 <body>
-	<form action="findapplicants" method="get">
+	<form action="findapplicant" method="get">
 		<h1>Search for applicants by birth country</h1>
 		<p>
-			<label for="BirthCountry">"BirthCountry"</label>
-			<input id=""BirthCountry"" name=""BirthCountry"" value="${fn:escapeXml(param."BirthCountry")}">
+			<label for="BirthCountry">BirthCountry</label>
+			<input id="BirthCountry" name="BirthCountry" value="${fn:escapeXml(param.BirthCountry)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -56,8 +56,8 @@
                     <td><c:out value="${applicant.getMajor()}" /></td>
                     <td><c:out value="${applicant.getYearCompleted()}" /></td>
                     <td><c:out value="${applicant.getInstitution()}" /></td>
-                    <td><c:out value="${applicant.getJobID()}" /></td>
-                    <td><c:out value="${applicant.getEmployerName()}" /></td>
+                    <td><c:out value="${applicant.getJob().getJobId()}" /></td>
+                    <td><c:out value="${applicant.getEmployer().getName()}" /></td>
                     
                 </tr>
             </c:forEach>

@@ -56,7 +56,7 @@ public class AgentDao {
     public Agent getAgentByName(String agentName) throws SQLException {
         String select = "select FirmName, City, State " +
                 "from Agent " +
-                "where Name = ?";
+                "where FirmName = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -114,7 +114,7 @@ public class AgentDao {
         }
     }
     public Agent delete(Agent agent) throws SQLException {
-        String deleteStatement = "DELETE FROM Agent WHERE Name=?;";
+        String deleteStatement = "DELETE FROM Agent WHERE FirmName=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {
