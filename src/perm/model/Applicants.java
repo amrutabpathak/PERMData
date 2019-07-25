@@ -1,4 +1,4 @@
-package perm.dao;
+package perm.model;
 
 public class Applicants {
 	protected long applicantId;
