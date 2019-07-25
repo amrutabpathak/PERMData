@@ -2,6 +2,7 @@ package perm.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import perm.model.Naics;
@@ -81,6 +82,39 @@ public class NaicsDao {
 				updateStmt.close();
 			}
 		}
+	}
+	
+	
+	public Naics getNaicsFromNaicsCode(int naicsCode) throws SQLException {
+		String selectNaics = "SELECT NAICSCode , NAICSTitle FROM NAICS WHERE NAICSCode =?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectNaics);
+			selectStmt.setInt(1, naicsCode);
+			results = selectStmt.executeQuery();
+			if(results.next()) {
+				int resultNaicsCode = results.getInt("NAICSCode");
+				String naicsTitle = results.getString("NAICSTitle");
+				return new Naics(resultNaicsCode, naicsTitle);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return null;
 	}
 	
 	
