@@ -18,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/employerupdate")
 public class EmployerUpdate extends HttpServlet {
 	
-	protected EmployerDao EmployerDao;
+	protected EmployerDao employerDao;
 	
 	@Override
 	public void init() throws ServletException {
-		EmployerDao = BlogUsersDao.getInstance();
+		employerDao = employerDao.getInstance();
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class EmployerUpdate extends HttpServlet {
             messages.put("success", "Please enter a valid UserName.");
         } else {
         	try {
-        		Employer employer = EmployerDao.getEmployerByName(employerName);
+        		Employer employer = employerDao.getEmployerByName(employerName);
         		if(employer == null) {
         			messages.put("success", "UserName does not exist.");
         		}
@@ -66,8 +66,13 @@ public class EmployerUpdate extends HttpServlet {
             messages.put("success", "Please enter a valid UserName.");
         } else {
 
-        		Employer employer = EmployerDao.getEmployerByName(name);
-        		if(employer == null) {
+			Employer employer = null;
+			try {
+				employer = employerDao.getEmployerByName(name);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if(employer == null) {
         			messages.put("success", "UserName does not exist. No update to perform.");
         		} else {
 

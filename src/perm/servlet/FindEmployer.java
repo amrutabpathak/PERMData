@@ -45,7 +45,7 @@ public class FindEmployer extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	employer = employerDao.getEmployerByName(name);
+            	employer.add(employerDao.getEmployerByName(name));
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
@@ -78,7 +78,7 @@ public class FindEmployer extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	employer = employerDao.getEmployerByName(name);
+            	employer.add(employerDao.getEmployerByName(name));
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);

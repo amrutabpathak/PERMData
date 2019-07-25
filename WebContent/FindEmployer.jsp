@@ -11,7 +11,7 @@
 <title>Find an Employer</title>
 </head>
 <body>
-	<form action="findemployers" method="get">
+	<form action="findemployer" method="get">
 		<h1>Search for a Employer by Name</h1>
 		<p>
 			<label for="employername">EmployerName</label>
@@ -48,13 +48,12 @@
                     <td><c:out value="${employer.getCity()}" /></td>
                     <td><c:out value="${employer.getState()}" /></td>
                     <td><c:out value="${employer.getCountry()}" /></td>
-                    <td><c:out value="${employer.getLastName()}" /></td>
                     <td><c:out value="${employer.getPostalCode()}" /></td>
                     <td><c:out value="${employer.getPhone()}" /></td>
                     <td><c:out value="${employer.getPhoneExt()}" /></td>
                     <td><c:out value="${employer.getNumOfEmployee()}" /></td>
                     <td><c:out value="${employer.getEstablishedYear()}" /></td>
-                    <td><c:out value="${employer.isFwOwnership()}" /></td>
+                    <td><c:out value="${employer.isFwOwnershipInterest()}" /></td>
                 </tr>
             </c:forEach>
        </table>

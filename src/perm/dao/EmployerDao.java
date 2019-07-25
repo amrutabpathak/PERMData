@@ -26,7 +26,7 @@ public class EmployerDao {
     }
 
     public Employer create(Employer employer) throws SQLException {
-        String insert = "INSERT INTO Employer(Name, Address1, Address2, City, State, Country, PostalCode, Phone, PhoneExt, NumOfEmployee, EstablishedYear, FwOwnership)" +
+        String insert = "INSERT INTO Employer(EmployerName, Address1, Address2, City, State, Country, PostalCode, Phone, PhoneExt, NumOfEmployee, EstablisedYear, FwOwnershipInterest)" +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -63,9 +63,9 @@ public class EmployerDao {
 
 
     public Employer getEmployerByName(String employerName) throws SQLException {
-        String select = "select Name, Address1, Address2, City, State, Country, PostalCode, Phone, PhoneExt, NumOfEmployee, EstablishedYear, FwOwnership " +
+        String select = "select EmployerName, Address1, Address2, City, State, Country, PostalCode, Phone, PhoneExt, NumOfEmployee, EstablisedYear, FwOwnershipInterest " +
                 "from Employer " +
-                "where Name = ?";
+                "where EmployerName = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -75,7 +75,7 @@ public class EmployerDao {
             statement.setString(1,employerName);
             resultSet = statement.executeQuery();
             if(resultSet.next()) {
-                String name = resultSet.getString("Name");
+                String name = resultSet.getString("EmployerName");
                 String address1 = resultSet.getString("Address1");
                 String address2 = resultSet.getString("Address2");
                 String city = resultSet.getString("City");
@@ -85,8 +85,8 @@ public class EmployerDao {
                 String phone = resultSet.getString("Phone");
                 int phoneExt = resultSet.getInt("PhoneExt");
                 int numOfEmployee = resultSet.getInt("NumOfEmployee");
-                int establishedYear = resultSet.getInt("EstablishedYear");
-                boolean fwOwnership = resultSet.getBoolean("FwOwnership");
+                int establishedYear = resultSet.getInt("EstablisedYear");
+                boolean fwOwnership = resultSet.getBoolean("FwOwnershipInterest");
                 return new Employer(name,address1,address2,city,state,country,postalCode,phone,phoneExt,numOfEmployee,establishedYear,fwOwnership);
             }
         } catch (SQLException e) {
@@ -107,7 +107,7 @@ public class EmployerDao {
     }
 
     public Employer updateEmployer(Employer employer, int numOfEmployee) throws SQLException {
-        String update = "update Employer set NumOfEmployee = ? where Name =?;";
+        String update = "update Employer set NumOfEmployee = ? where EmployerName =?;";
         Connection connection = null;
         PreparedStatement statement = null;
         try{
@@ -131,7 +131,7 @@ public class EmployerDao {
         }
     }
     public Employer delete(Employer employer) throws SQLException {
-        String deleteStatement = "DELETE FROM Employer WHERE Name=?;";
+        String deleteStatement = "DELETE FROM Employer WHERE EmployerName=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {

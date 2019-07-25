@@ -31,11 +31,11 @@
                 <th>City</th>
                 <th>State</th>
             </tr>
-            <c:forEach items="${agents}" var="employer" >
+            <c:forEach items="${agents}" var="agent" >
                 <tr>
-                    <td><c:out value="${agent.getFirmName()}" /></td>
-                    <td><c:out value="${agent.getCity()}" /></td>
-                    <td><c:out value="${agent.getState()}" /></td>
+                    <th><c:out value="${agent.getFirmName()}" /></th>
+                    <th><c:out value="${agent.getCity()}" /></th>
+                    <th><c:out value="${agent.getState()}" /></th>
                 </tr>
             </c:forEach>
        </table>

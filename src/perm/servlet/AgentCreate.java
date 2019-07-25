@@ -52,14 +52,14 @@ public class AgentCreate extends HttpServlet {
             messages.put("success", "Invalid UserName");
         } else {
         	// Create the BlogUser.
-        	String name = req.getParameter("agentname");
+        	String agentName = req.getParameter("agentname");
 			String city = req.getParameter("City");
 			String state = req.getParameter("State");
 	        try {
 	        	// Exercise: parse the input for StatusLevel.
-	        	Agent agent = new Agent(name, city, state);
+	        	Agent agent = new Agent(agentName, city, state);
 	        	agent = agentDao.create(agent);
-	        	messages.put("success", "Successfully created " + name);
+	        	messages.put("success", "Successfully created " + agentName);
 	        } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);

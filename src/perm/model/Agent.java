@@ -1,4 +1,4 @@
-package perm.Model;
+package perm.model;
 
 public class Agent {
     private String firmName;
@@ -9,6 +9,10 @@ public class Agent {
         this.firmName = firmName;
         this.city = city;
         this.state = state;
+    }
+
+    public Agent(String firmName) {
+        this.firmName = firmName;
     }
 
     public String getFirmName() {
