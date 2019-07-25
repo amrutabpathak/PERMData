@@ -91,17 +91,17 @@ public class ApplicationDao {
 	 * Update the Scheduled of the Application instance.
 	 */
 	public Application updateScheduled(Application application, boolean scheduled) throws SQLException {
-		String updateSocTitle = "UPDATE SOCSystem SET PrevailingWageSocTitle =? WHERE PrevailingWageSocCode =?;";
+		String updateApplicationScheduled = "UPDATE NAICS SET Scheduled =? WHERE CaseNumber =?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			updateStmt = connection.prepareStatement(updateSocTitle);
-			updateStmt.setString(1, socTitle);
-			updateStmt.setString(2, socSystem.getPrevailingWageSocCode());
+			updateStmt = connection.prepareStatement(updateApplicationScheduled);
+			updateStmt.setBoolean(1, scheduled);
+			updateStmt.setString(2, application.getCaseNumber());
 			updateStmt.executeUpdate();
-			socSystem.setPrevailingWageSocTitle(socTitle);
-			return socSystem;
+			application.setScheduled(scheduled);
+			return application;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
