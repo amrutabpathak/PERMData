@@ -59,8 +59,8 @@
 				 <th>ExpirationDate </th> 
 				 <th>PrevailingWageSocCode </th> 
 				 <th>NAICSCode</th>
-                 <th>Delete BlogUser</th>
-                 <th>Update BlogUser</th>
+                 <th>Delete </th>
+                 <th>Update </th>
             </tr>
             <c:forEach items="${jobs}" var="job" >
                 <tr>

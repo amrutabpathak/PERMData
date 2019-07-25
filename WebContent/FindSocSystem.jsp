@@ -39,7 +39,6 @@
                 <tr>
                     <td><c:out value="${socSystem.getPrevailingWageSocCode()}" /></td>
                     <td><c:out value="${socSystem.getPrevailingWageSocTitle()}" /></td>
-                    <td><a href="findjobs?soccode=<c:out value="${socSystem.getPrevailingWageSocCode()}"/>">Jobs</a></td>
                     <td><a href="socsystemdelete?prevailingwagesoccode=<c:out value="${socSystem.getPrevailingWageSocCode()}"/>">Delete</a></td>
                     <td><a href="socsystemupdate?prevailingwagesoccode=<c:out value="${socSystem.getPrevailingWageSocCode()}"/>">Update</a></td>
                 </tr>
