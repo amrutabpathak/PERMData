@@ -30,7 +30,7 @@ public class ApplicantUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        String applicantId = req.getParameter("ApplicantId");
+        String applicantId = req.getParameter("ApplicantID");
         if (applicantId == null || applicantId.trim().isEmpty()) {
             messages.put("success", "Please enter a valid applicant id.");
         } else {
@@ -57,7 +57,7 @@ public class ApplicantUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
        
-        String applicantId = req.getParameter("ApplicantId");
+        String applicantId = req.getParameter("ApplicantID");
         if (applicantId == null || applicantId.trim().isEmpty()) {
             messages.put("success", "Please enter a valid applicant id.");
         } else {

@@ -51,10 +51,10 @@ public class AdvertisementCreate extends HttpServlet{
         } else {
         	JobDao jobsDao = JobDao.getInstance();
         	
-        	int advertisementIdResult = Integer.parseInt(req.getParameter("AdvertisementId"));
+        	int advertisementIdResult = Integer.parseInt(req.getParameter("AdvertisementID"));
         	Advertisements.AdvertiseMeans means = Advertisements.AdvertiseMeans.valueOf(req.getParameter("Means"));
 			
-			Long jobId = Long.parseLong(req.getParameter("JobId"));	
+			Long jobId = Long.parseLong(req.getParameter("JobID"));	
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         	String start = req.getParameter("StartDate");
@@ -75,7 +75,7 @@ public class AdvertisementCreate extends HttpServlet{
 				
 	        	Advertisements advertisement = new Advertisements(advertisementIdResult, means,startDate,endDate,job);
 	        	advertisement = advertisementDao.create(advertisement);
-	        	messages.put("success", "Successfully created " + advertisementId);
+	        	messages.put("success", "Successfully created AdvertisementId" + advertisementId);
 	        } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);

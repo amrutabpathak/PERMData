@@ -50,11 +50,11 @@ public class AdvertisementDelete extends HttpServlet {
 	        Advertisements advertisement = new Advertisements(advertisementId);
 	        try {
 	        	advertisement = advertisementDao.delete(advertisement);
-		        if (advertisement == null) {
-		            messages.put("title", "Successfully deleted " + advertisementId);
+		        if (advertisement != null) {
+		            messages.put("title", "Successfully deleted AdvertisementId" + advertisementId);
 		            messages.put("disableSubmit", "true");
 		        } else {
-		        	messages.put("title", "Failed to delete " + advertisementId);
+		        	messages.put("title", "Failed to delete AdvertisementId" + advertisementId);
 		        	messages.put("disableSubmit", "false");
 		        }
 	        } catch (SQLException e) {

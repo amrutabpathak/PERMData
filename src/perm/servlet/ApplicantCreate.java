@@ -38,16 +38,20 @@ public class ApplicantCreate extends HttpServlet{
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-   
+        String applicantId = req.getParameter("ApplicantID");
+        if (applicantId == null || applicantId.trim().isEmpty()) {
+            messages.put("success", "Invalid applicantId");
+        } else {
         	JobDao jobsDao = JobDao.getInstance();
 			EmployerDao employersDao = EmployerDao.getInstance();
+			long applicantIdResult = Long.parseLong(req.getParameter("ApplicantID"));
         	String city = req.getParameter("City");
 			String state = req.getParameter("State");
 			String code = req.getParameter("Code");
 			String citizenship = req.getParameter("Citizenship");
 			String birthCountry = req.getParameter("BirthCountry");
 			String admissionClass = req.getParameter("AdmissionClass");
-			Applicants.EducationLevel education = Applicants.EducationLevel.valueOf(req.getParameter("Education"));
+			Applicants.EducationLevel education = Applicants.EducationLevel.fromString(req.getParameter("Education"));
 			String educationOther = req.getParameter("EducationOther");
 			String major = req.getParameter("Major");
 			String yearCompleted = req.getParameter("YearCompleted");
@@ -58,14 +62,14 @@ public class ApplicantCreate extends HttpServlet{
 			try {
 				Job job = jobsDao.getJobById(jobId);
 				Employer employer = employersDao.getEmployerByName(employerName);
-	        	Applicants applicant = new Applicants(city,state,code,citizenship,birthCountry,admissionClass,education,educationOther,major,yearCompleted,institution,job,employer);
+	        	Applicants applicant = new Applicants(applicantIdResult,city,state,code,citizenship,birthCountry,admissionClass,education,educationOther,major,yearCompleted,institution,job,employer);
 	        	applicant = applicantDao.create(applicant);
 	        	messages.put("success", "Successfully created " + applicant.getApplicantId());
 	        } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 	        }
-        
+        }
         
 			req.getRequestDispatcher("/ApplicantCreate.jsp").forward(req, resp);
     }
