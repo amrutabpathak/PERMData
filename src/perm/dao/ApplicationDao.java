@@ -55,7 +55,7 @@ public class ApplicationDao {
 	}
 	
 	public Application create(Application application) throws SQLException {
-		String selectApplication = "INSERT INTO Application(CaseNumber,DecistonDate,CaseStatus,CaseReceivedDate,Refile,OriginalFileDate,Scheduled,EmployerName,ApplicantID,AgentFirmName) VALUES(?,?,?,?,?,?,?,?,?,?);";	
+		String selectApplication = "INSERT INTO Application(CaseNumber,DecistionDate,CaseStatus,CaseReceivedDate,Refile,OriginalFileDate,Scheduled,EmployerName,ApplicantID,AgentFirmName) VALUES(?,?,?,?,?,?,?,?,?,?);";	
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		try {
