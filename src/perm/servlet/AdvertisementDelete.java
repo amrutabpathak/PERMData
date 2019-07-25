@@ -50,7 +50,7 @@ public class AdvertisementDelete extends HttpServlet {
 	        Advertisements advertisement = new Advertisements(advertisementId);
 	        try {
 	        	advertisement = advertisementDao.delete(advertisement);
-		        if (advertisement != null) {
+		        if (advertisement == null) {
 		            messages.put("title", "Successfully deleted AdvertisementId" + advertisementId);
 		            messages.put("disableSubmit", "true");
 		        } else {
