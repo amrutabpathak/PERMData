@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import perm.model.*;
@@ -49,7 +47,7 @@ public class ApplicantsDao {
 			insertStmt.setString(10, applicant.getYearCompleted());
 			insertStmt.setString(11, applicant.getInstitution());
 			insertStmt.setLong(12, applicant.getJob().getJobId());
-			insertStmt.setString(13, applicant.getEmployer().getEmployerName());
+			insertStmt.setString(13, applicant.getEmployer().getName());
 
 			insertStmt.executeUpdate();
 
@@ -89,7 +87,7 @@ public class ApplicantsDao {
 			updateStmt.setLong(2, applicant.getApplicantId());
 			updateStmt.executeUpdate();
 
-			// Update the blogComment param before returning to the caller.
+			
 			applicant.setAdmissionClass(newAdmissionClass);
 
 			return applicant;
@@ -143,8 +141,8 @@ public class ApplicantsDao {
 			selectStmt.setLong(1, applicantId);
 			results = selectStmt.executeQuery();
 
-			JobsDao jobsDao = JobsDao.getInstance();
-			EmployersDao employersDao = EmployersDao.getInstance();
+			JobDao jobsDao = JobDao.getInstance();
+			EmployerDao employersDao = EmployerDao.getInstance();
 
 			if (results.next()) {
 				long resultApplicantId = results.getLong("ApplicantId");
@@ -162,8 +160,8 @@ public class ApplicantsDao {
 				Long jobId = results.getLong("JobId");
 				String employerName = results.getString("EmployerName");
 
-				Jobs job = jobsDao.getJobById(jobId);
-				Employers employer = employersDao.getEmployerFromName(employerName);
+				Job job = jobsDao.getJobById(jobId);
+				Employer employer = employersDao.getEmployerByName(employerName);
 				Applicants applicant = new Applicants(resultApplicantId, city, state, code, citizenship, birthCountry,
 						admissionClass, education, educationOther, major, yearCompleted, institution, job, employer);
 				return applicant;
@@ -200,8 +198,8 @@ public class ApplicantsDao {
 			selectStmt.setString(1, admissionClass);
 			results = selectStmt.executeQuery();
 			
-			JobsDao jobsDao = JobsDao.getInstance();
-			EmployersDao employersDao = EmployersDao.getInstance();
+			JobDao jobsDao = JobDao.getInstance();
+			EmployerDao employersDao = EmployerDao.getInstance();
 			while (results.next()) {
 				long resultApplicantId = results.getLong("ApplicantId");
 				String city = results.getString("City");
@@ -218,8 +216,8 @@ public class ApplicantsDao {
 				Long jobId = results.getLong("JobId");					
 				String employerName = results.getString("EmployerName");
 
-				Jobs job = jobsDao.getJobById(jobId);
-				Employers employer = employersDao.getEmployerFromName(employerName);
+				Job job = jobsDao.getJobById(jobId);
+				Employer employer = employersDao.getEmployerByName(employerName);
 				Applicants applicant = new Applicants(resultApplicantId, city, state, code, citizenship, birthCountry,
 						resultAdmissionClass, education, educationOther, major, yearCompleted, institution, job, employer);
 				applicants.add(applicant);
@@ -256,8 +254,8 @@ public class ApplicantsDao {
 			selectStmt.setString(1, birthCountry);
 			results = selectStmt.executeQuery();
 			
-			JobsDao jobsDao = JobsDao.getInstance();
-			EmployersDao employersDao = EmployersDao.getInstance();
+			JobDao jobsDao = JobDao.getInstance();
+			EmployerDao employersDao = EmployerDao.getInstance();
 			while (results.next()) {
 				long resultApplicantId = results.getLong("ApplicantId");
 				String city = results.getString("City");
@@ -274,8 +272,8 @@ public class ApplicantsDao {
 				Long jobId = results.getLong("JobId");					
 				String employerName = results.getString("EmployerName");
 
-				Jobs job = jobsDao.getJobById(jobId);
-				Employers employer = employersDao.getEmployerFromName(employerName);
+				Job job = jobsDao.getJobById(jobId);
+				Employer employer = employersDao.getEmployerByName(employerName);
 				Applicants applicant = new Applicants(resultApplicantId, city, state, code, citizenship, resultBirthCountry,admissionClass, education, educationOther, major, yearCompleted, institution, job, employer);
 				applicants.add(applicant);
 			}

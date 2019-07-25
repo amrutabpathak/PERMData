@@ -1,4 +1,4 @@
-package perm.dao;
+package perm.model;
 
 import java.util.Date;
 
