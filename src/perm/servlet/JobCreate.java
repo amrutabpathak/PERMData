@@ -65,7 +65,7 @@ public class JobCreate extends HttpServlet {
 		String educationOther = req.getParameter("educationother");
 		String major = req.getParameter("major");
 		String requiresTraining =req.getParameter("requirestraining");
-		String trainingMonths = "0";//req.getParameter("trainingmonths");
+		String trainingMonths = req.getParameter("trainingmonths");
 		
 		String trainingField = req.getParameter("trainingfield");
 		String requiresExp =req.getParameter("requiresexp");
