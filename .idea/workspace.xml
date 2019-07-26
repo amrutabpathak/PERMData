@@ -13,16 +13,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FindAgent.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/FindAgent.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AgentDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/perm/dao/AgentDao.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,11 +83,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobCreate.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobCreate.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/perm/servlet/JobCreate.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="249">
               <caret line="65" column="73" lean-forward="false" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReshareEmployerAgentDao.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/perm/dao/ReshareEmployerAgentDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -177,9 +177,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="398" />
-    <option name="width" value="1042" />
-    <option name="height" value="820" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -246,20 +245,6 @@
             <path>
               <item name="PERMdata" type="b2602c69:ProjectViewProjectNode" />
               <item name="PERMdata" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="perm" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PERMdata" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PERMdata" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="perm" type="462c0819:PsiDirectoryNode" />
-              <item name="servlet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PERMdata" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PERMdata" type="462c0819:PsiDirectoryNode" />
               <item name="WebContent" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -281,10 +266,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/perm/dao" />
       <recent name="$PROJECT_DIR$/WebContent" />
       <recent name="$PROJECT_DIR$/src/perm/servlet" />
       <recent name="$PROJECT_DIR$/src/perm/model" />
-      <recent name="$PROJECT_DIR$/src/perm/dao" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -393,12 +378,12 @@
       <option name="presentableId" value="Default" />
       <updated>1563938499748</updated>
       <workItem from="1563938501701" duration="10517000" />
-      <workItem from="1564037878236" duration="5805000" />
+      <workItem from="1564037878236" duration="7147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16322000" />
+    <option name="totallyTimeSpent" value="17664000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -415,7 +400,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CodeMR" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36396614" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36396614" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -445,14 +430,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/perm/servlet/EmployerUpdate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="5" lean-forward="false" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/perm/servlet/EmployerCreate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1155">
@@ -846,6 +823,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
           <caret line="65" column="73" lean-forward="false" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/perm/dao/ReshareEmployerAgentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

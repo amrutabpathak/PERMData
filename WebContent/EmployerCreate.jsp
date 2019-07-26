@@ -11,7 +11,7 @@
 <title>Create an Employer</title>
 </head>
 <body>
-	<h1>Create BlogUser</h1>
+	<h1>Create Employer</h1>
 	<form action="employercreate" method="post">
 		<p>
 			<label for="employername">EmployerName</label>
