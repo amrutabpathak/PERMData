@@ -66,8 +66,10 @@ public class NaicsDao {
 		try {
 			connection = connectionManager.getConnection();
 			updateStmt = connection.prepareStatement(updateNaicsTitle);
-			updateStmt.setInt(1,  naics.getNaicsCode());
-			updateStmt.setString(2,naicsTitle);
+			updateStmt.setString(1, naicsTitle);
+			updateStmt.setInt(2,naics.getNaicsCode());
+			System.out.println("~~nac "+naics.getNaicsCode());
+			System.out.println("~~nac "+naicsTitle);
 			updateStmt.executeUpdate();
 			naics.setNaicsTitle(naicsTitle);
 			return naics;

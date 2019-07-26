@@ -91,7 +91,7 @@ public class ApplicationDao {
 	 * Update the Scheduled of the Application instance.
 	 */
 	public Application updateScheduled(Application application, boolean scheduled) throws SQLException {
-		String updateApplicationScheduled = "UPDATE NAICS SET Scheduled =? WHERE CaseNumber =?;";
+		String updateApplicationScheduled = "UPDATE Application SET Scheduled =? WHERE CaseNumber =?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -152,7 +152,7 @@ public class ApplicationDao {
 	 * This runs a SELECT statement and returns a single Application instance.
 	 */
 	public Application getApplicationFromCaseNumber(String caseNumber) throws SQLException {
-		String selectApplication = "SELECT CaseNumber, DecisionDate ,CaseStatus ,CaseReceivedDate ," + 
+		String selectApplication = "SELECT CaseNumber, DecistionDate ,CaseStatus ,CaseReceivedDate ," + 
 				"Refile ,OriginalFileDate ,Scheduled ,EmployerName ," + 
 				"ApplicantID ,AgentFirmName FROM Application WHERE CaseNumber =?;";
 		Connection connection = null;
@@ -163,6 +163,7 @@ public class ApplicationDao {
 			selectStmt = connection.prepareStatement(selectApplication);
 			selectStmt.setString(1, caseNumber);
 			results = selectStmt.executeQuery();
+			System.out.println("~~~~");
 			if(results.next()) {
 				String resultCaseNumber = results.getString("CaseNumber");
 				Date decistionDate = results.getDate("DecistionDate");
@@ -174,6 +175,7 @@ public class ApplicationDao {
 				String employerName = results.getString("EmployerName");
 				long applicantId= results.getLong("ApplicantId");
 				String agentFirmName = results.getString("AgentFirmName");
+				System.out.println("~~~~"+employerName);
 				return new Application(resultCaseNumber, decistionDate, caseStatus, caseReceivedDate, refile, originalFileDate, scheduled, employerName, applicantId, agentFirmName);
 				
 			}
