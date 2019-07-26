@@ -8,14 +8,17 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import perm.dao.AgentDao;
 import perm.dao.ApplicationDao;
 import perm.model.Agent;
 import perm.model.Application;
 import perm.model.Application.CaseStatus;
-import perm.model.Employer;
+
 
 @WebServlet("/applicationcreate")
 public class ApplicationCreate extends HttpServlet {
@@ -33,7 +36,6 @@ protected ApplicationDao applicationDao;
 		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        //Just render the JSP.   
         req.getRequestDispatcher("/ApplicationCreate.jsp").forward(req, resp);
 	}
 	
@@ -44,14 +46,14 @@ protected ApplicationDao applicationDao;
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        // Retrieve and validate casenumber.
         String caseNumber = req.getParameter("casenumber");
         if (caseNumber == null || caseNumber.trim().isEmpty()) {
             messages.put("success", "Invalid CaseNumber");
         } else {
         	// Create the BlogUser.
         	String decistionDatestr = req.getParameter("decistiondate"); //check
-			CaseStatus caseStatus = req.getParameter("casestatus");
+			Applicants.EducationLevel education = Applicants.EducationLevel.fromString(req.getParameter("Education"));
+            Application.CaseStatus caseStatus = Application.CaseStatus.fromString(req.getParameter("casestatus"));
 			String caseReceivedDatestr = req.getParameter("casereceiveddate"); //check
 			boolean refile = req.getParameter("refile").equals("true")? true: false;
 			String originalFileDatestr = req.getParameter("originalfiledate"); //check

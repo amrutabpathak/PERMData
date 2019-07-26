@@ -24,6 +24,10 @@ public class Naics {
 
 
 
+	public Naics() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getNaicsCode() {
 		return naicsCode;
 	}

@@ -7,6 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import perm.dao.ApplicationDao;
 import perm.model.Application;
 
@@ -31,7 +37,7 @@ public class FindApplication extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        Application application; 
+        Application application = new Application(); 
         
         // Retrieve and validate name.
         // firstname is retrieved from the URL query string.
@@ -63,7 +69,7 @@ public class FindApplication extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        Application application;
+        Application application = new Application();
         
         // Retrieve and validate name.
         // firstname is retrieved from the form POST submission. By default, it

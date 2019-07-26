@@ -191,6 +191,7 @@ public class ApplicationDao {
 				results.close();
 			}
 		}
+		
 		return null;
 	}
 

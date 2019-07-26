@@ -1,6 +1,10 @@
 package perm.model;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import perm.model.Job.EducationLevel;
 
 /**
  * 
@@ -31,6 +35,7 @@ ON UPDATE CASCADE ON DELETE SET NULL
  */
 
 
+
 public class Application {
 	protected String caseNumber;
 	protected Date decistionDate;
@@ -42,6 +47,30 @@ public class Application {
 	protected String employerName;
 	protected long applicantId;
 	protected String agentFirmName;
+	
+	
+	
+	
+	public enum CaseStatus {
+		Denied("Denied"),
+		CertifiedExpired("CertifiedExpired"),
+		Certified("Certified");
+		
+	    private String name;
+
+	    CaseStatus(String name) {
+	        this.name = name;
+	    }
+
+	    public static CaseStatus fromString(String s) {
+	    	for (CaseStatus e : values()) {
+	    		if (e.name.equals(s)) {
+	    			return e;
+	    		}
+	    	}
+	    	return Denied;
+		}
+	}
 	
 	public Application(String caseNumber,Date decistionDate, CaseStatus caseStatus, Date caseReceivedDate, boolean refile, 
 			Date originalFileDate, boolean scheduled, String employerName, long applicantId, String agentFirmName) {
@@ -62,14 +91,10 @@ public class Application {
 		this.caseNumber = caseNumber; 
 	}
 
-	
-	
-	
-	public enum CaseStatus {
-		Denied,CertifiedExpired,Certified
-	}
-	
 
+	public Application() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getCaseNumber() {
 		return caseNumber;

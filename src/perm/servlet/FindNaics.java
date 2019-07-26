@@ -5,10 +5,16 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import perm.dao.NaicsDao;
 import perm.model.Naics;
 
-@WebServlet("/findapplication")
+@WebServlet("/findnaics")
 public class FindNaics extends HttpServlet {
 	
 	NaicsDao naicsDao;
@@ -26,7 +32,7 @@ public class FindNaics extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        Naics naics; 
+        Naics naics = new Naics(); 
         
         // Retrieve and validate name.
         // firstname is retrieved from the URL query string.
@@ -59,7 +65,7 @@ public class FindNaics extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        Naics naics;
+        Naics naics = new Naics();
         
         // Retrieve and validate name.
         // firstname is retrieved from the form POST submission. By default, it

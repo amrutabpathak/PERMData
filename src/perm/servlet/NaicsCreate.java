@@ -5,6 +5,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import perm.dao.NaicsDao;
 import perm.model.Naics;
 
@@ -38,11 +44,11 @@ protected NaicsDao naicsDao;
         req.setAttribute("messages", messages);
 
         // Retrieve and validate naics codes.
-        int naicsCode = req.getParameter("naicscode");
+        String naicsCode = req.getParameter("naicscode");
         String naicsTitle = req.getParameter("naicstitle");
 
 	        try {
-	        	Naics naics = new Naics(naicsCode, naicsTitle);
+	        	Naics naics = new Naics(Integer.parseInt(naicsCode), naicsTitle);
 	        	naics = naicsDao.create(naics);
 	        	messages.put("success", "Successfully created " + naicsCode);
 	        } catch (SQLException e) {

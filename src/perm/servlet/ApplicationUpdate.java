@@ -5,6 +5,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import perm.dao.ApplicationDao;
 import perm.model.Application;
 
@@ -60,16 +66,15 @@ public class ApplicationUpdate extends HttpServlet {
         String caseNumber = req.getParameter("caseNumber");
         if (caseNumber == null || caseNumber.trim().isEmpty()) {
             messages.put("success", "Please enter a valid caseNumber.");
-        } else {
-
+        }else {
         		Application application = applicationDao.getApplicationFromCaseNumber(caseNumber);
         		if(application == null) {
         			messages.put("success", "caseNumber does not exist. No update to perform.");
         		} else {
-					boolean scheduled = req.getParameter("scheduled");
+					String scheduled = req.getParameter("scheduled");
 					try {
 
-						application = applicationDao.updateScheduled(application,scheduled);
+						application = applicationDao.updateScheduled(application,Boolean.parseBoolean(scheduled));
 						messages.put("success", "Successfully created " + caseNumber);
 					} catch (SQLException e) {
 						e.printStackTrace();
