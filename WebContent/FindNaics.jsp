@@ -11,7 +11,7 @@
 <title>Find a Naics</title>
 </head>
 <body>
-	<form action="findsocsystem" method="post">
+	<form action="findnaics" method="post">
 		<h1>Search for a Naics by Naics Code</h1>
 		<p>
 			<label for="naicscode">SOC Title</label>
@@ -30,10 +30,10 @@
                 <th>NaicsCode</th>
                 <th>NaicsTitle</th>
             </tr>
-            <c:forEach items="${naics}" var="naics" >
+            <c:forEach items="${naics}" var="naic" >
                 <tr>
-                    <td><c:out value="${naics.getNaicsCode()}" /></td>
-                    <td><c:out value="${naics.getNaicsTitle()}" /></td>                    
+                    <td><c:out value="${naic.getNaicsCode()}" /></td>
+                    <td><c:out value="${naic.getNaicsTitle()}" /></td>                    
                 </tr>
             </c:forEach>
        </table>
