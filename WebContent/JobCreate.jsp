@@ -15,6 +15,10 @@
 	<h1>Create Job</h1>
 	<form action="jobcreate" method="post">
 		<p>
+			<label for="jobid">Job Id</label>
+			<input id="jobid" name="jobid" value="">
+		</p>
+		<p>
 			<label for="city">City</label>
 			<input id="city" name="city" value="">
 		</p>

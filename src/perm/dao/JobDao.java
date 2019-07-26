@@ -41,8 +41,8 @@ public class JobDao {
 			" Major ,RequiresTraining, TrainingMonths ,TrainingField ,RequiresExp,ExpMonths ,RequiresAltField ,AltFieldName ,"+
 			" ComboEduExpDegree ,ComboEduExpDegreeOther ,ComboEduExpYrs ,WageOfferFrom9089 ,WageOfferTo9089 ,"+
 			" WageOfferUnit ,Level9089 ,Amount ,UnitOfPay ,SourceName ,SourceNameOther ,DetermDate ,ExpirationDate ,"+
-			" PrevailingWageSocCode ,NAICSCode ) " +
-			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			" PrevailingWageSocCode ,NAICSCode,JobID ) " +
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -80,15 +80,8 @@ public class JobDao {
 			insertStmt.setDate(27, job.getExpirationDate());
 			insertStmt.setString(28,job.getSocSystem().getPrevailingWageSocCode());
 			insertStmt.setInt(29,  job.getNaics().getNaicsCode());
+			insertStmt.setLong(30,job.getJobId());
 			insertStmt.executeUpdate();
-			resultKey = insertStmt.getGeneratedKeys();
-			int jobId = -1;
-			if(resultKey.next()) {
-				jobId = resultKey.getInt(1);
-			} else {
-				throw new SQLException("Unable to retrieve auto-generated key.");
-			}
-			job.setJobId(jobId);
 			return job;
 		} catch (SQLException e) {
 			e.printStackTrace();
