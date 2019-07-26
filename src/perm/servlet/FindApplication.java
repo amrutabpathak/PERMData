@@ -3,6 +3,7 @@ package perm.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class FindApplication extends HttpServlet {
         
         // Retrieve and validate name.
         // firstname is retrieved from the URL query string.
-        String caseNumber = req.getParameter("caseNumber");
+        String caseNumber = req.getParameter("casenumber");
         if (caseNumber == null || caseNumber.trim().isEmpty()) {
             messages.put("success", "Please enter a valid caseNumber.");
         } else {
@@ -57,7 +58,7 @@ public class FindApplication extends HttpServlet {
         	// in the input box when rendering FindUsers.jsp.
         	messages.put("previousCaseNumber", caseNumber);
         }
-        req.setAttribute("application", application);
+        req.setAttribute("applications", Arrays.asList(application));
         
         req.getRequestDispatcher("/FindApplication.jsp").forward(req, resp);
 	}

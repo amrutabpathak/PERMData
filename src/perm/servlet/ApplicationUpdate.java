@@ -63,7 +63,7 @@ public class ApplicationUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        String caseNumber = req.getParameter("caseNumber");
+        String caseNumber = req.getParameter("casenumber");
         if (caseNumber == null || caseNumber.trim().isEmpty()) {
             messages.put("success", "Please enter a valid caseNumber.");
         }else {

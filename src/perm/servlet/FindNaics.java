@@ -2,6 +2,7 @@ package perm.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ public class FindNaics extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
     		int naicsCode = Integer.parseInt(naicsCodestr);
+    		System.out.println("~~~int "+ naicsCode );
         	try {
             	naics = naicsDao.getNaicsFromNaicsCode(naicsCode);
             } catch (SQLException e) {
@@ -53,7 +55,8 @@ public class FindNaics extends HttpServlet {
         	// in the input box when rendering FindUsers.jsp.
         	messages.put("previousNaicsCode", naicsCodestr);
         }
-        req.setAttribute("naics", naics);
+        System.out.println("~~~naaa "+ naics.getNaicsCode() );
+        req.setAttribute("naics", Arrays.asList(naics));
         
         req.getRequestDispatcher("/FindNaics.jsp").forward(req, resp);
 	}
