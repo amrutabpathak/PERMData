@@ -63,11 +63,17 @@ public class ApplicationUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        String caseNumber = req.getParameter("caseNumber");
+        String caseNumber = req.getParameter("casenumber");
         if (caseNumber == null || caseNumber.trim().isEmpty()) {
             messages.put("success", "Please enter a valid caseNumber.");
         }else {
-        		Application application = applicationDao.getApplicationFromCaseNumber(caseNumber);
+        		Application application = new Application();
+				try {
+					application = applicationDao.getApplicationFromCaseNumber(caseNumber);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         		if(application == null) {
         			messages.put("success", "caseNumber does not exist. No update to perform.");
         		} else {

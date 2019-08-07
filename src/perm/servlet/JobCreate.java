@@ -55,6 +55,8 @@ public class JobCreate extends HttpServlet {
 
 
         	// Create the BlogUser.
+        String jobIdStr = req.getParameter("jobid");
+        int jobId = Integer.parseInt(jobIdStr);
         String city = req.getParameter("city");
 		String state = req.getParameter("state");
 		String code = req.getParameter("code");
@@ -63,7 +65,7 @@ public class JobCreate extends HttpServlet {
 		String educationOther = req.getParameter("educationother");
 		String major = req.getParameter("major");
 		String requiresTraining =req.getParameter("requirestraining");
-		String trainingMonths = "0";//req.getParameter("trainingmonths");
+		String trainingMonths = req.getParameter("trainingmonths");
 		
 		String trainingField = req.getParameter("trainingfield");
 		String requiresExp =req.getParameter("requiresexp");
@@ -110,7 +112,7 @@ public class JobCreate extends HttpServlet {
 			}
 
 	        try {
-	        	Job job = new Job(city,state,code, jobTitle, EducationLevel.get(education),  educationOther,
+	        	Job job = new Job(jobId,city,state,code, jobTitle, EducationLevel.get(education),  educationOther,
 	        			 major, AspectRequired.valueOf(requiresTraining) , Integer.parseInt(trainingMonths) , trainingField,
 	        			AspectRequired.valueOf(requiresExp) , Integer.parseInt(expMonths), AspectRequired.valueOf(requiresAltField) , altFieldName,
 	        			EducationLevel.get(comboEduExpDegree) , comboEduExpDegreeOther, comboEduExpYrs,

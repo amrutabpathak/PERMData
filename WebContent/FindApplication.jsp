@@ -39,13 +39,13 @@
             </tr>
             <c:forEach items="${applications}" var="application" >
                 <tr>
-                    <td><c:out value="${application.getCaseNumber())}" /></td>
+                    <td><c:out value="${application.getCaseNumber()}" /></td>
                     <td><c:out value="${application.getDecistionDate()}" /></td>
                     <td><c:out value="${application.getCaseStatus()}" /></td>
-                    <td><c:out value="${application.getCaseReceivedDate())}" /></td>
-                    <td><c:out value="${application.getRefile()}" /></td>
+                    <td><c:out value="${application.getCaseReceivedDate()}" /></td>
+                    <td><c:out value="${application.isRefile()}" /></td>
                     <td><c:out value="${application.getOriginalFileDate()}" /></td>
-                    <td><c:out value="${application.getScheduled()}" /></td>
+                    <td><c:out value="${application.isScheduled()}" /></td>
                     <td><c:out value="${application.getEmployerName()}" /></td>
                     <td><c:out value="${application.getApplicantId()}" /></td>
                     <td><c:out value="${application.getAgentFirmName()}" /></td>

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import perm.dao.ApplicationDao;
 import perm.model.Agent;
+import perm.model.Applicants;
 import perm.model.Application;
 import perm.model.Application.CaseStatus;
 
@@ -52,7 +53,6 @@ protected ApplicationDao applicationDao;
         } else {
         	// Create the BlogUser.
         	String decistionDatestr = req.getParameter("decistiondate"); //check
-			Applicants.EducationLevel education = Applicants.EducationLevel.fromString(req.getParameter("Education"));
             Application.CaseStatus caseStatus = Application.CaseStatus.fromString(req.getParameter("casestatus"));
 			String caseReceivedDatestr = req.getParameter("casereceiveddate"); //check
 			boolean refile = req.getParameter("refile").equals("true")? true: false;
