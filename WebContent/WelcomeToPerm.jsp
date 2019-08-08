@@ -30,15 +30,15 @@
 Create
 </button>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="http://localhost:8080/Perm/AdvertisementCreate.jsp">Advertisement</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/AgentCreate.jsp">Agent</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ApplicantCreate.jsp">Applicant</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ApplicationCreate.jsp">Application</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/EmployerCreate.jsp">Employer</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/JobCreate.jsp">Job</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/NaicsCreate.jsp">NAICS</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ReshareCreate.jsp">Reshare</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/SocSystemCreate.jsp">SOCSystem</a>
+<a class="dropdown-item" href="advertisementcreate">Advertisement</a>
+<a class="dropdown-item" href="agentcreate">Agent</a>
+<a class="dropdown-item" href="applicantcreate">Applicant</a>
+<a class="dropdown-item" href="applicationcreate">Application</a>
+<a class="dropdown-item" href="employercreate">Employer</a>
+<a class="dropdown-item" href="jobcreate">Job</a>
+<a class="dropdown-item" href="naicscreate">NAICS</a>
+<a class="dropdown-item" href="resharecreate">Reshare</a>
+<a class="dropdown-item" href="socsystemcreate">SOCSystem</a>
 </div>
 </div>
   </li>
@@ -49,15 +49,15 @@ Create
 Read
 </button>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindAdvertisement.jsp">Advertisement</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindAgent.jsp">Agent</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindApplicant.jsp">Applicant</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindApplication.jsp">Application</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindEmployer.jsp">Employer</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindJob.jsp">Job</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindNaics.jsp">NAICS</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindReshare.jsp">Reshare</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/FindSocSystem.jsp">SOCSystem</a>
+<a class="dropdown-item" href="findadvertisement">Advertisement</a>
+<a class="dropdown-item" href="findagent">Agent</a>
+<a class="dropdown-item" href="findapplicant">Applicant</a>
+<a class="dropdown-item" href="findapplication">Application</a>
+<a class="dropdown-item" href="findemployer">Employer</a>
+<a class="dropdown-item" href="findjobs">Job</a>
+<a class="dropdown-item" href="findnaics">NAICS</a>
+<a class="dropdown-item" href="findreshare">Reshare</a>
+<a class="dropdown-item" href="findsocsystem">SOCSystem</a>
 </div>
 </div>
     </li>
@@ -68,15 +68,15 @@ Read
 Update
 </button>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="http://localhost:8080/Perm/AdvertisementUpdate.jsp">Advertisement</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/AgentUpdate.jsp">Agent</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ApplicantUpdate.jsp">Applicant</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ApplicationUpdate.jsp">Application</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/EmployerUpdate.jsp">Employer</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/JobUpdate.jsp">Job</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/NaicsUpdate.jsp">NAICS</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ReshareUpdate.jsp">Reshare</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/SocSystemUpdate.jsp">SOCSystem</a>
+<a class="dropdown-item" href="advertisementupdate">Advertisement</a>
+<a class="dropdown-item" href="agentupdate">Agent</a>
+<a class="dropdown-item" href="applicantupdate">Applicant</a>
+<a class="dropdown-item" href="applicationupdate">Application</a>
+<a class="dropdown-item" href="employerupdate">Employer</a>
+<a class="dropdown-item" href="jobupdate">Job</a>
+<a class="dropdown-item" href="naicsupdate">NAICS</a>
+<a class="dropdown-item" href="reshareupdate">Reshare</a>
+<a class="dropdown-item" href="socsystemupdate">SOCSystem</a>
 </div>
 </div>
     </li>
@@ -87,15 +87,15 @@ Update
 Delete
 </button>
 <div class="dropdown-menu">
-<a class="dropdown-item" href="http://localhost:8080/Perm/AdvertisementDelete.jsp">Advertisement</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/AgentDelete.jsp">Agent</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ApplicantDelete.jsp">Applicant</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ApplicationDelete.jsp">Application</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/EmployerDelete.jsp">Employer</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/JobDelete.jsp">Job</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/NaicsDelete.jsp">NAICS</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/ReshareDelete.jsp">Reshare</a>
-<a class="dropdown-item" href="http://localhost:8080/Perm/SocSystemDelete.jsp">SOCSystem</a>
+<a class="dropdown-item" href="advertisementdelete">Advertisement</a>
+<a class="dropdown-item" href="agentdelete">Agent</a>
+<a class="dropdown-item" href="applicantdelete">Applicant</a>
+<a class="dropdown-item" href="applicationdelete">Application</a>
+<a class="dropdown-item" href="employerdelete">Employer</a>
+<a class="dropdown-item" href="jobdelete">Job</a>
+<a class="dropdown-item" href="naicsdelete">NAICS</a>
+<a class="dropdown-item" href="resharedelete">Reshare</a>
+<a class="dropdown-item" href="socsystemdelete">SOCSystem</a>
 </div>
 </div>
     </li>
